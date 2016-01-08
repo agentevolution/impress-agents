@@ -1,0 +1,2 @@
+<?php
+echo '<a href="http://www.agentevolution.com/equity" target="_blank"><img style="max-width: 100%;" src="' . IMPRESS_AGENTS_URL . 'images/equity-ad.png" alt="Import your Employees with the Equity Framework"></a>';
