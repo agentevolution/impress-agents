@@ -13,14 +13,17 @@ Employee Directory for WordPress tailored for Real Estate Offices.
 
 == Description ==
 
+This plugin adds a custom post type for Employees with custom meta fields for employee contact info. It uses included templates to display the contact info for single and archive pages, or these can be overridden in the theme.
 
-Feel free to contribute to this project on [Github](https://github.com/agentevolution/impress-team).
+Adds taxonomies for Offices and Job Types to show employees by location and job title.
+
+Coming soon: Import agent details from the IDX API!
 
 == Installation ==
 
-1. Upload the entire `impress-agents` folder to the `/wp-content/plugins/` directory
+1. Install from the WP Admin Dashboard – or download, then unzip, and upload the entire `impress-agents` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Begin creating adding agents to the directory.
+3. Begin adding employees to the directory.
 
 == Frequently Asked Questions ==
 
