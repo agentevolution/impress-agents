@@ -1,135 +1,58 @@
 <?php
 /**
- * Adds shortcode to display employees
- * Adds shortcode to display post meta
+ * Adds shortcode to display agent profiles
  */
 
-add_shortcode( 'employees', 'impress_agents_shortcode' );
+add_shortcode( 'employee_profiles', 'impa_profile_shortcode' );
 
-function impress_agents_shortcode($atts, $content = null) {
-	extract(shortcode_atts(array(
-		'id'       => '',
-		'taxonomy' => '',
-		'term'     => '',
-		'limit'    => '',
-		'columns'  => ''
-	), $atts ) );
+function impa_profile_shortcode($atts, $content = null) {
+    extract(shortcode_atts(array(
+        'id'   => ''
+    ), $atts ) );
 
-	/**
-	 * if limit is empty set to all
-	 */
-	if(!$limit) {
-		$limit = -1;
-	}
+    if ($id == '') {
+        $query_args = array(
+            'post_type'       => 'employee',
+            'posts_per_page'  => -1,
+            'orderby'   => 'menu_order',
+            'order'     => 'ASC'
 
-	/**
-	 * if columns is empty set to 0
-	 */
-	if(!$columns) {
-		$columns = 0;
-	}
+        );
+    } else {
+        $query_args = array(
+            'post_type'       => 'employee',
+            'post__in'        => explode(',', $id),
+            'posts_per_page'  => -1,
+            'orderby'         => 'menu_order',
+            'order'           => 'ASC'
 
-	/*
-	 * query args based on parameters
-	 */
-	$query_args = array(
-		'post_type'       => 'employee',
-		'posts_per_page'  => $limit
-	);
+        );
+    }
 
-	if($id) {
-		$query_args = array(
-			'post_type'       => 'employee',
-			'post__in'        => explode(',', $id)
-		);
-	}
+    global $post;
 
-	if($term && $taxonomy) {
-		$query_args = array(
-			'post_type'       => 'employee',
-			'posts_per_page'  => $limit,
-			'tax_query'       => array(
-				array(
-					'taxonomy' => $taxonomy,
-					'field'    => 'slug',
-					'terms'     => $term
-				)
-			)
-		);
-	}
+    $profiles_array = get_posts( $query_args );
 
-	/*
-	 * start loop
-	 */
-	global $post;
+    $output = '';
 
-	$employees_array = get_posts( $query_args );
+    foreach ( $profiles_array as $post ) : setup_postdata( $post );
 
-	$count = 0;
+        $output .= '<div class="shortcode-agent-wrap">';
+        $output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( $post->ID, 'employee-thumbnail' ) . '</a>';
+        $output .= '<div class="shortcode-agent-details"><a class="fn" href="' . get_permalink() . '">' . get_the_title() . '</a>';
+        $output .= impa_employee_details();
+        // if (function_exists('_p2p_init') && function_exists('agentpress_listings_init') || function_exists('_p2p_init') && function_exists('wp_listings_init')) {
+        //     $output .= '<a class="agent-listings-link" href="' . get_permalink() . '#agent-listings">View My Listings</a>';
+        // }
 
-	$output = '<div class="impress-agents-shortcode">';
+        $output .= '</div>';
+        $output .= impa_employee_social();
 
-	foreach ( $employees_array as $post ) : setup_postdata( $post );
+        $output .= '</div><!-- .shortcode-agent-wrap -->';
 
-		$count = ( $count == $columns ) ? 1 : $count + 1;
+    endforeach;
+    wp_reset_postdata();
 
-		$first_class = ( 1 == $count ) ? 'first' : '';
+    return $output;
 
-		$output .= '<div class="employee-wrap ' . get_column_class($columns) . ' ' . $first_class . '"><div class="employee-widget-thumb"><a href="' . get_permalink() . '" class="employee-image-link">' . get_the_post_thumbnail( $post->ID, 'employees' ) . '</a>';
-
-		if ( '' != impress_agents_get_status() ) {
-			$output .= '<span class="employee-status ' . strtolower(str_replace(' ', '-', impress_agents_get_status())) . '">' . impress_agents_get_status() . '</span>';
-		}
-
-		$output .= '<div class="employee-thumb-meta">';
-
-		if ( '' != get_post_meta( $post->ID, '_employee_text', true ) ) {
-			$output .= '<span class="employee-text">' . get_post_meta( $post->ID, '_employee_text', true ) . '</span>';
-		} elseif ( '' != impress_agents_get_employee_types() ) {
-			$output .= '<span class="employee-employee-type">' . impress_agents_get_employee_types() . '</span>';
-		}
-
-		if ( '' != get_post_meta( $post->ID, '_employee_price', true ) ) {
-			$output .= '<span class="employee-price">' . get_post_meta( $post->ID, '_employee_price', true ) . '</span>';
-		}
-
-		$output .= '</div><!-- .employee-thumb-meta --></div><!-- .employee-widget-thumb -->';
-
-		if ( '' != get_post_meta( $post->ID, '_employee_open_house', true ) ) {
-			$output .= '<span class="employee-open-house">' . __( "Open House", 'impress_agents' ) . ': ' . get_post_meta( $post->ID, '_employee_open_house', true ) . '</span>';
-		}
-
-		$output .= '<div class="employee-widget-details"><h3 class="employee-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
-		$output .= '<p class="employee-address"><span class="employee-address">' . impress_agents_get_address() . '</span><br />';
-		$output .= '<span class="employee-city-state-zip">' . impress_agents_get_city() . ', ' . impress_agents_get_state() . ' ' . get_post_meta( $post->ID, '_employee_zip', true ) . '</span></p>';
-
-		if ( '' != get_post_meta( $post->ID, '_employee_bedrooms', true ) || '' != get_post_meta( $post->ID, '_employee_bathrooms', true ) || '' != get_post_meta( $post->ID, '_employee_sqft', true )) {
-			$output .= '<ul class="employee-beds-baths-sqft"><li class="beds">' . get_post_meta( $post->ID, '_employee_bedrooms', true ) . '<span>' . __( "Beds", 'impress_agents' ) . '</span></li> <li class="baths">' . get_post_meta( $post->ID, '_employee_bathrooms', true ) . '<span>' . __( "Baths", 'impress_agents' ) . '</span></li> <li class="sqft">' . get_post_meta( $post->ID, '_employee_sqft', true ) . '<span>' . __( "Square Feet", 'impress_agents' ) . '</span></li></ul>';
-		}
-
-		$output .= '</div><!-- .employee-widget-details --></div><!-- .employee-wrap -->';
-
-	endforeach;
-
-	$output .= '</div><!-- .impress-agents-shortcode -->';
-
-	wp_reset_postdata();
-
-	return $output;
-
-}
-
-add_shortcode('impress_agents_meta', 'impress_agents_meta_shortcode');
-/**
- * Returns meta data for employees
- * @param  array $atts meta key
- * @return string meta value wrapped in span
- */
-function impress_agents_meta_shortcode($atts) {
-	extract(shortcode_atts(array(
-		'key' => ''
-	), $atts ) );
-	$postid = get_the_id();
-
-	return '<span class=' . $key . '>' . get_post_meta($postid, '_employee_' . $key, true) . '</span>';
 }

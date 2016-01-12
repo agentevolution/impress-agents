@@ -49,6 +49,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-wp-i18n');
 
-  grunt.registerTask('build', ['sass', 'makepot']);
+  grunt.registerTask('build', ['makepot']);
   grunt.registerTask('default', ['build','watch']);
 };

@@ -19,6 +19,7 @@ function impa_change_sort_order( $query ) {
 }
 
 add_image_size( 'employee-thumbnail', 150, 200, true );
+add_image_size( 'employee-full', 300, 400, true );
 
 add_filter( 'template_include', 'impress_agents_template_include' );
 function impress_agents_template_include( $template ) {
@@ -71,54 +72,54 @@ function impa_employee_details() {
 
     $output = '';
 
-    if (get_post_meta($post->ID, '_employee_title') != '')
-        $output .= sprintf('<p class="title" itemprop="jobTitle">%s</p>', get_post_meta($post->ID, '_employee_title') );
+    if (get_post_meta($post->ID, '_employee_title', true) != '')
+        $output .= sprintf('<p class="title" itemprop="jobTitle">%s</p>', get_post_meta($post->ID, '_employee_title', true) );
 
-    if (get_post_meta($post->ID, '_employee_license') != '')
-        $output .= sprintf('<p class="license">%s</p>', get_post_meta($post->ID, '_employee_license') );
+    if (get_post_meta($post->ID, '_employee_license', true) != '')
+        $output .= sprintf('<p class="license">%s</p>', get_post_meta($post->ID, '_employee_license', true) );
 
-    if (get_post_meta($post->ID, '_employee_designations') != '')
-        $output .= sprintf('<p class="designations" itemprop="awards">%s</p>', get_post_meta($post->ID, '_employee_designations') );
+    if (get_post_meta($post->ID, '_employee_designations', true) != '')
+        $output .= sprintf('<p class="designations" itemprop="awards">%s</p>', get_post_meta($post->ID, '_employee_designations', true) );
 
-    if (get_post_meta($post->ID, '_employee_phone') != '')
-        $output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Office</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_phone') );
+    if (get_post_meta($post->ID, '_employee_phone', true) != '')
+        $output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Office</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_phone', true) );
 
-    if (get_post_meta($post->ID, '_employee_mobile') != '')
-        $output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Cell</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_mobile') );
+    if (get_post_meta($post->ID, '_employee_mobile', true) != '')
+        $output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Cell</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_mobile', true) );
 
-    if (get_post_meta($post->ID, '_employee_fax') != '')
-        $output .= sprintf('<p class="tel fax" itemprop="faxNumber"><span class="type">Fax</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_fax') );
+    if (get_post_meta($post->ID, '_employee_fax', true) != '')
+        $output .= sprintf('<p class="tel fax" itemprop="faxNumber"><span class="type">Fax</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_fax', true) );
 
-    if (get_post_meta($post->ID, '_employee_email') != '')
-        $email = get_post_meta($post->ID, '_employee_email');
+    if (get_post_meta($post->ID, '_employee_email', true) != '')
+        $email = get_post_meta($post->ID, '_employee_email', true);
         $output .= sprintf('<p><a class="email" itemprop="email" href="mailto:%s">%s</a></p>', antispambot($email), antispambot($email) );
 
-    if (get_post_meta($post->ID, '_employee_website') != '')
-        $output .= sprintf('<p><a class="website" itemprop="url" href="http://%s">%s</a></p>', get_post_meta($post->ID, '_employee_website'), get_post_meta($post->ID, '_employee_website') );
+    if (get_post_meta($post->ID, '_employee_website', true) != '')
+        $output .= sprintf('<p><a class="website" itemprop="url" href="http://%s">%s</a></p>', get_post_meta($post->ID, '_employee_website', true), get_post_meta($post->ID, '_employee_website', true) );
 
-    if (get_post_meta($post->ID, '_employee_city') != '' || get_post_meta($post->ID, '_employee_address') != '' || get_post_meta($post->ID, '_employee_state') != '' || get_post_meta($post->ID, '_employee_zip') != '' ) {
+    if (get_post_meta($post->ID, '_employee_city', true) != '' || get_post_meta($post->ID, '_employee_address', true) != '' || get_post_meta($post->ID, '_employee_state', true) != '' || get_post_meta($post->ID, '_employee_zip', true) != '' ) {
 
         $address = '<p class="adr" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">';
 
-        if (get_post_meta($post->ID, '_employee_address') != '') {
-            $address .= '<span class="street-address" itemprop="streetAddress">' . get_post_meta($post->ID, '_employee_address') . '</span><br />';
+        if (get_post_meta($post->ID, '_employee_address', true) != '') {
+            $address .= '<span class="street-address" itemprop="streetAddress">' . get_post_meta($post->ID, '_employee_address', true) . '</span><br />';
         }
 
-        if (get_post_meta($post->ID, '_employee_city') != '') {
-            $address .= '<span class="locality" itemprop="addressLocality">' . get_post_meta($post->ID, '_employee_city') . '</span>, ';
+        if (get_post_meta($post->ID, '_employee_city', true) != '') {
+            $address .= '<span class="locality" itemprop="addressLocality">' . get_post_meta($post->ID, '_employee_city', true) . '</span>, ';
         }
 
-        if (get_post_meta($post->ID, '_employee_state') != '') {
-            $address .= '<abbr class="region" itemprop="addressRegion">' . get_post_meta($post->ID, '_employee_state') . '</abbr> ';
+        if (get_post_meta($post->ID, '_employee_state', true) != '') {
+            $address .= '<abbr class="region" itemprop="addressRegion">' . get_post_meta($post->ID, '_employee_state', true) . '</abbr> ';
         }
 
-        if (get_post_meta($post->ID, '_employee_zip') != '') {
-            $address .= '<span class="postal-code" itemprop="postalCode">' . get_post_meta($post->ID, '_employee_zip') . '</span>';
+        if (get_post_meta($post->ID, '_employee_zip', true) != '') {
+            $address .= '<span class="postal-code" itemprop="postalCode">' . get_post_meta($post->ID, '_employee_zip', true) . '</span>';
         }
 
         $address .= '</p>';
 
-        if (get_post_meta($post->ID, '_employee_address') != '' || get_post_meta($post->ID, '_employee_city') != '' || get_post_meta($post->ID, '_employee_state') != '' || get_post_meta($post->ID, '_employee_zip') != '' ) {
+        if (get_post_meta($post->ID, '_employee_address', true) != '' || get_post_meta($post->ID, '_employee_city', true) != '' || get_post_meta($post->ID, '_employee_state', true) != '' || get_post_meta($post->ID, '_employee_zip', true) != '' ) {
             $output .= $address;
         }
     }
@@ -127,37 +128,38 @@ function impa_employee_details() {
 }
 
 function impa_employee_social() {
+	global $post;
 
-    if (get_post_meta($post->ID, '_employee_facebook') != '' || get_post_meta($post->ID, '_employee_twitter') != '' || get_post_meta($post->ID, '_employee_linkedin') != '' || get_post_meta($post->ID, '_employee_googleplus') != '' || get_post_meta($post->ID, '_employee_pinterest') != '' || get_post_meta($post->ID, '_employee_youtube') != '' || get_post_meta($post->ID, '_employee_instagram') != '') {
+    if (get_post_meta($post->ID, '_employee_facebook', true) != '' || get_post_meta($post->ID, '_employee_twitter', true) != '' || get_post_meta($post->ID, '_employee_linkedin', true) != '' || get_post_meta($post->ID, '_employee_googleplus', true) != '' || get_post_meta($post->ID, '_employee_pinterest', true) != '' || get_post_meta($post->ID, '_employee_youtube', true) != '' || get_post_meta($post->ID, '_employee_instagram', true) != '') {
 
         $output = '<div class="agent-social-profiles">';
 
-        if (get_post_meta($post->ID, '_employee_facebook') != '') {
-            $output .= sprintf('<a class="icon-facebook" rel="me" itemprop="sameAs" href="%s" title="Facebook Profile"></a>', get_post_meta($post->ID, '_employee_facebook'));
+        if (get_post_meta($post->ID, '_employee_facebook', true) != '') {
+            $output .= sprintf('<a class="fa fa-facebook" rel="me" itemprop="sameAs" href="%s" title="Facebook Profile"></a>', get_post_meta($post->ID, '_employee_facebook', true));
         }
 
-        if (get_post_meta($post->ID, '_employee_twitter') != '') {
-            $output .= sprintf('<a class="icon-twitter" rel="me" itemprop="sameAs" href="%s" title="Twitter Profile"></a>', get_post_meta($post->ID, '_employee_twitter'));
+        if (get_post_meta($post->ID, '_employee_twitter', true) != '') {
+            $output .= sprintf('<a class="fa fa-twitter" rel="me" itemprop="sameAs" href="%s" title="Twitter Profile"></a>', get_post_meta($post->ID, '_employee_twitter', true));
         }
 
-        if (get_post_meta($post->ID, '_employee_linkedin') != '') {
-            $output .= sprintf('<a class="icon-linkedin" rel="me" itemprop="sameAs" href="%s" title="LinkedIn Profile"></a>', get_post_meta($post->ID, '_employee_linkedin'));
+        if (get_post_meta($post->ID, '_employee_linkedin', true) != '') {
+            $output .= sprintf('<a class="fa fa-linkedin" rel="me" itemprop="sameAs" href="%s" title="LinkedIn Profile"></a>', get_post_meta($post->ID, '_employee_linkedin', true));
         }
 
-        if (get_post_meta($post->ID, '_employee_googleplus') != '') {
-            $output .= sprintf('<a class="icon-gplus" rel="me" itemprop="sameAs" href="%s" title="Google+ Profile"></a>', get_post_meta($post->ID, '_employee_googleplus'));
+        if (get_post_meta($post->ID, '_employee_googleplus', true) != '') {
+            $output .= sprintf('<a class="fa fa-google-plus" rel="me" itemprop="sameAs" href="%s" title="Google+ Profile"></a>', get_post_meta($post->ID, '_employee_googleplus', true));
         }
 
-        if (get_post_meta($post->ID, '_employee_pinterest') != '') {
-            $output .= sprintf('<a class="icon-pinterest" rel="me" itemprop="sameAs" href="%s" title="Pinterest Profile"></a>', get_post_meta($post->ID, '_employee_pinterest'));
+        if (get_post_meta($post->ID, '_employee_pinterest', true) != '') {
+            $output .= sprintf('<a class="fa fa-pinterest" rel="me" itemprop="sameAs" href="%s" title="Pinterest Profile"></a>', get_post_meta($post->ID, '_employee_pinterest', true));
         }
 
-        if (get_post_meta($post->ID, '_employee_youtube') != '') {
-            $output .= sprintf('<a class="icon-youtube" rel="me" itemprop="sameAs" href="%s" title="YouTube Profile"></a>', get_post_meta($post->ID, '_employee_youtube'));
+        if (get_post_meta($post->ID, '_employee_youtube', true) != '') {
+            $output .= sprintf('<a class="fa fa-youtube" rel="me" itemprop="sameAs" href="%s" title="YouTube Profile"></a>', get_post_meta($post->ID, '_employee_youtube', true));
         }
 
-        if (get_post_meta($post->ID, '_employee_instagram') != '') {
-            $output .= sprintf('<a class="icon-instagram" rel="me" itemprop="sameAs" href="%s" title="Instagram Profile"></a>', get_post_meta($post->ID, '_employee_instagram'));
+        if (get_post_meta($post->ID, '_employee_instagram', true) != '') {
+            $output .= sprintf('<a class="fa fa-instagram" rel="me" itemprop="sameAs" href="%s" title="Instagram Profile"></a>', get_post_meta($post->ID, '_employee_instagram', true));
         }
 
         $output .= '</div><!-- .employee-social-profiles -->';
