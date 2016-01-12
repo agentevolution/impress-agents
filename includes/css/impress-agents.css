@@ -1,0 +1,277 @@
+/* ====== Structure ====== */
+
+.employee-archive .agent-wrap {
+	float: right;
+	clear: right;
+	width: auto;
+	margin: 0 0 70px;
+	width: 47%;
+}
+
+.employee-archive .agent-wrap.even {
+	border: 0;
+	float: left;
+	clear: left;
+}
+
+.agent-details {
+	float: left;
+	position: relative;
+}
+
+.single-employee .agent-details,
+.employee-archive .agent-details {
+	position: relative;
+	height: auto;
+	overflow: hidden;
+}
+
+.agent-social-profiles {
+	margin-top: 10px;
+	overflow: hidden;
+}
+
+.single-employee .agent-bio {
+	clear: both;
+	padding-top: 30px;
+}
+
+.employee-archive .agent-details p {
+	font-size: 1em;
+	line-height: 150%;
+	padding: 0;
+	margin: 0;
+}
+
+.single-employee .agent-details p {
+	font-size: 1em;
+	line-height: 150%;
+	padding-bottom: 5px;
+	margin: 0;
+}
+
+.single-employee p.title {
+	font-weight: 700;
+}
+
+.single-employee .connected-agent-listings h3 {
+	margin: 0 0 10px;
+}
+
+.single-employee .one-third {
+	float: left;
+	margin: 0 0 20px;
+	width: 31%;
+	padding-left: 3%;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+.single-employee .one-third.first {
+	clear: both;
+	padding-left: 0;
+}
+
+.single-employee .listing-price {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	font-size: 120%;
+	background: none;
+	color: inherit;
+}
+
+.single-employee .listing-beds,
+.single-employee .listing-baths {
+	width: 48%;
+	float: left;
+}
+
+.single-employee .listing-baths {
+	float: right;
+}
+
+.single-employee span[class*="label-"] {
+	font-weight: 700;
+}
+
+/* ====== Structure (single listing if connected) ====== */
+
+.single-listing .connected-agents {
+	background: #f5f5f5;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.single-listing .connected-agents h5,
+.single-listing .connected-agents p {
+	font-size: 85%;
+	line-height: 1;
+	margin-bottom: 10px;
+}
+
+/* Hide website and address */
+.single-listing .connected-agents .website,
+.single-listing .connected-agents .adr {
+	display: none;
+}
+
+/* ====== Hyperlinks ====== */
+
+.employee-archive a.fn {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+	display: block;
+}
+
+.employee-archive a,
+.employee-archive a:hover,
+.single-employee .agent-details a,
+.single-employee .agent-details a:hover,
+.agent-social-profiles a:hover,
+.agent-social-profiles a:active {
+	text-decoration: none;
+}
+
+.agent-social-profiles a {
+	display: inline-block;
+	margin-right: 5px;
+	font-size: 18px;
+}
+
+/* ====== Images ====== */
+
+.single-employee .agent-wrap img,
+.employee-archive .agent-wrap img,
+.single-listing .connected-agents img {
+	float: left;
+	border: 1px solid #efefef;
+	-moz-box-shadow: 2px 2px 3px #DDD;
+	-webkit-box-shadow: 2px 2px 3px #DDD;
+	-khtml-box-shadow: 2px 2px 3px #DDD;
+	box-shadow: 2px 2px 3px #DDD;
+	margin-right: 20px;
+}
+
+
+/* ====== Misc. ====== */
+
+.clearfix:before {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+	content: " ";
+	display: table;
+}
+
+.featured-agent .widget-wrap {overflow: hidden;}
+
+.employee-archive .navigation {clear: both;}
+
+/* ====== Widget ====== */
+
+.widget.featured-employee {
+	overflow: hidden;
+}
+.widget.featured-employee img {
+	float: left;
+	clear: left;
+	width: 80px;
+	height: auto;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #efefef;
+	-moz-box-shadow: 2px 2px 3px #DDD;
+	-webkit-box-shadow: 2px 2px 3px #DDD;
+	-khtml-box-shadow: 2px 2px 3px #DDD;
+	box-shadow: 2px 2px 3px #DDD;
+}
+
+.widget.featured-employee p {
+	font-size: 1em;
+	line-height: 170%;
+	text-align: left;
+	padding: 0;
+	margin: 0;
+}
+
+.widget.featured-employee .agent-social-profiles {
+	clear: both;
+}
+
+.widget-agent-details {
+	float: left;
+}
+
+.widget-agent-details p {
+	margin: 0;
+}
+
+.widget-agent-wrap {
+	float: left;
+	clear: left;
+	padding: 0 0 20px;
+	margin: 0 0 20px;
+	border-bottom: 1px solid #888;
+	border-bottom: 1px solid rgba(00,00,00,0.3);
+	width: 100%;
+}
+
+
+/* ====== Shortcode ====== */
+.shortcode-agent-wrap {
+	overflow: hidden;
+	clear: both;
+	margin-bottom: 25px;
+}
+
+.shortcode-agent-wrap img {
+	float: left;
+	margin: 0 10px 10px 0;
+	border: 1px solid #efefef;
+	-moz-box-shadow: 2px 2px 3px #DDD;
+	-webkit-box-shadow: 2px 2px 3px #DDD;
+	-khtml-box-shadow: 2px 2px 3px #DDD;
+	box-shadow: 2px 2px 3px #DDD;
+	max-width: 100%;
+}
+
+.shortcode-agent-details {
+	float: left;
+	margin-right: 20px;
+}
+
+.shortcode-agent-wrap .fn {
+	font-size: 20px;
+}
+
+.entry-content .shortcode-agent-details p {
+	margin: 0;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.shortcode-agent-wrap .agent-social-profiles {
+	float: right;
+	margin: 0;
+}
+
+
+/* ====== Responsive ====== */
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+	.single-employee .one-third {
+		width: 100%;
+		clear: both;
+		padding: 0;
+	}
+
+	.single-employee .one-third img {
+		width: 100%;
+	}
+}

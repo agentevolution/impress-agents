@@ -43,7 +43,7 @@ function impress_agents_deactivation() {
 
 add_action( 'after_setup_theme', 'impress_agents_init' );
 /**
- * Initialize IMPress Employees.
+ * Initialize IMPress Agents.
  *
  * Include the libraries, define global variables, instantiate the classes.
  *
@@ -54,7 +54,7 @@ function impress_agents_init() {
 	global $_impress_agents, $_impress_agents_taxonomies;
 
 	define( 'IMPRESS_AGENTS_URL', plugin_dir_url( __FILE__ ) );
-	define( 'IMPRESS_AGENTS_VERSION', '0.9' );
+	define( 'IMPRESS_AGENTS_VERSION', '0.9.0' );
 
 	/** Load textdomain for translation */
 	load_plugin_textdomain( 'impress_agents', false, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -65,17 +65,12 @@ function impress_agents_init() {
 	require_once( dirname( __FILE__ ) . '/includes/shortcodes.php' );
 	require_once( dirname( __FILE__ ) . '/includes/class-agents.php' );
 	require_once( dirname( __FILE__ ) . '/includes/class-taxonomies.php' );
+	require_once( dirname( __FILE__ ) . '/includes/class-employee-widget.php' );
 
 	/** Add theme support for post thumbnails if it does not exist */
 	if(!current_theme_supports('post-thumbnails')) {
 		add_theme_support( 'post-thumbnails' );
 	}
-
-	/** Registers and enqueues scripts for single employees */
-	// add_action('wp_enqueue_scripts', 'add_impress_agents_scripts');
-	// function add_impress_agents_scripts() {
-
-	// }
 
 	/** Enqueues impress-agents.css style file if it exists and is not deregistered in settings */
 	add_action('wp_enqueue_scripts', 'add_impress_agents_main_styles');
@@ -126,13 +121,11 @@ function impress_agents_init() {
 	}
 	add_action( 'admin_enqueue_scripts', 'impress_agents_admin_scripts_styles' );
 
-
-
 	/** Instantiate */
 	$_impress_agents = new IMPress_Agents;
 	$_impress_agents_taxonomies = new IMPress_Agents_Taxonomies;
 
-	//add_action( 'widgets_init', 'impress_agents_register_widgets' );
+	add_action( 'widgets_init', 'impress_agents_register_widgets' );
 
 }
 
@@ -141,12 +134,12 @@ function impress_agents_init() {
  *
  * @since 0.9.0
  */
-// function impress_agents_register_widgets() {
+function impress_agents_register_widgets() {
 
-// 	$widgets = array( '' );
+	$widgets = array( 'IMPress_Agents_Widget' );
 
-// 	foreach ( (array) $widgets as $widget ) {
-// 		register_widget( $widget );
-// 	}
+	foreach ( (array) $widgets as $widget ) {
+		register_widget( $widget );
+	}
 
-// }
+}
