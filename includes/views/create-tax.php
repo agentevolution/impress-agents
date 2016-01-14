@@ -1,4 +1,6 @@
-<?php screen_icon( 'themes' ); ?>
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+screen_icon( 'themes' ); ?>
 <h2><?php _e( 'Employee Taxonomies', 'impress_agents' ); ?></h2>
 
 <div id="col-container">

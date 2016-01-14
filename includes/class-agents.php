@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * This file contains the IMPress_Agents class.
  */
@@ -40,7 +41,7 @@ class IMPress_Agents {
 			),
 			'col2' => array(
 				__( 'Email:', 'impress_agents' )			=> '_employee_email',
-				__( 'Website (NO http://):', 'impress_agents' )	=> '_employee_website',
+				__( 'Website:', 'impress_agents' )			=> '_employee_website',
 				__( 'Address:', 'impress_agents' ) 			=> '_employee_address',
 				__( 'City:', 'impress_agents' )				=> '_employee_city',
 				__( 'State:', 'impress_agents' )			=> '_employee_state',
@@ -181,6 +182,14 @@ class IMPress_Agents {
 
 	    /** Store the employee details custom fields */
 	    foreach ( (array) $employee_details as $key => $value ) {
+
+	    	$key = sanitize_key($key);
+
+	    	if($key == '_employee_email') {
+	    		$value = sanitize_email($value);
+	    	} else {
+	    		$value = sanitize_text_field($value);
+	    	}
 
 	        /** Save/Update/Delete */
 	        if ( $value ) {
