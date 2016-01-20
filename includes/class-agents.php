@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * This file contains the IMPress_Agents class.
  */
@@ -31,16 +32,18 @@ class IMPress_Agents {
 
 		$this->employee_details = apply_filters( 'impress_agents_employee_details', array(
 			'col1' => array(
+				__( 'First Name:', 'impress_agents' ) 		=> '_employee_first_name',
+				__( 'Last Name:', 'impress_agents' ) 		=> '_employee_last_name',
 				__( 'Title:', 'impress_agents' ) 			=> '_employee_title',
-				__( 'License #:', 'impress_agents' ) 		=> '_employee_license',
-				__( 'Designations:', 'impress_agents' ) 	=> '_employee_designations',
+				__( 'Email:', 'impress_agents' )			=> '_employee_email',
+				__( 'Website:', 'impress_agents' )			=> '_employee_website',
 				__( 'Phone:', 'impress_agents' ) 			=> '_employee_phone',
-				__( 'Mobile:', 'impress_agents' ) 			=> '_employee_mobile',
-				__( 'Fax:', 'impress_agents' ) 				=> '_employee_fax'
+				__( 'Mobile:', 'impress_agents' ) 			=> '_employee_mobile'
 			),
 			'col2' => array(
-				__( 'Email:', 'impress_agents' )			=> '_employee_email',
-				__( 'Website (NO http://):', 'impress_agents' )	=> '_employee_website',
+				__( 'License #:', 'impress_agents' ) 		=> '_employee_license',
+				__( 'Agent ID:', 'impress_agents' ) 		=> '_employee_agent_id',
+				__( 'Designations:', 'impress_agents' ) 	=> '_employee_designations',
 				__( 'Address:', 'impress_agents' ) 			=> '_employee_address',
 				__( 'City:', 'impress_agents' )				=> '_employee_city',
 				__( 'State:', 'impress_agents' )			=> '_employee_state',
@@ -182,6 +185,14 @@ class IMPress_Agents {
 	    /** Store the employee details custom fields */
 	    foreach ( (array) $employee_details as $key => $value ) {
 
+	    	$key = sanitize_key($key);
+
+	    	if($key == '_employee_email') {
+	    		$value = sanitize_email($value);
+	    	} else {
+	    		$value = sanitize_text_field($value);
+	    	}
+
 	        /** Save/Update/Delete */
 	        if ( $value ) {
 	            update_post_meta($post->ID, $key, $value);
@@ -201,9 +212,9 @@ class IMPress_Agents {
 		$columns = array(
 			'cb'					=> '<input type="checkbox" />',
 			'employee_thumbnail'	=> __( 'Thumbnail', 'impress_agents' ),
-			'title'					=> __( 'Employee Title', 'impress_agents' ),
+			'title'					=> __( 'Employee Name', 'impress_agents' ),
 			'employee_details'		=> __( 'Details', 'impress_agents' ),
-			'employee_tags'			=> __( 'Tags', 'impress_agents' )
+			'employee_tags'			=> __( 'Categories', 'impress_agents' )
 		);
 
 		return $columns;
