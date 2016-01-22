@@ -102,6 +102,13 @@
 	background: #f5f5f5;
 	padding: 10px;
 	margin-bottom: 20px;
+	border: none;
+}
+
+#listing-agent,
+#listing-agent + #listing-contact {
+	float: left;
+	width: 48%;
 }
 
 .single-listing .connected-agents h5,
