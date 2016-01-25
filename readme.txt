@@ -17,7 +17,7 @@ IMPress Agents provides you with a full employee directory, however it is ideal 
 
 This plugin adds a custom post type for Employees with post meta fields for employee contact info. It uses included templates to display the contact info for single and archive pages, or these can be overridden in your theme.
 
-Adds taxonomies for Offices and Job Types to show employees by location and/or job title. Or add custom taxonmies to categorize to your needs.
+Adds taxonomies for Offices and Job Types to show employees by location and/or job title. Or add custom taxonmies to categorize to your needs. If using WP 4.4+, you can add images to taxonomy terms and display an image for an office, job title, or an custom taxonomy term.
 
 If using the [IMPress Listings](https://wordpress.org/plugins/wp-listings/) plugin, you can connect Employees to Listings. *Requires the [Posts 2 Posts](https://wordpress.org/plugins/posts-to-posts/) plugin*
 
@@ -42,11 +42,14 @@ Certainly! It functions as an employee directory, with or without an IDX account
 Just post to the support forum here on [wordpress.org](https://wordpress.org/support/plugin/impress-agents/) or developers can post to the [IMPress Agents Github repo](https://github.com/agentevolution/impress-agents).
 
 == Screenshots ==
-1.
-2.
-3.
-4.
-5.
+1. WP Admin > Add New
+2. WP Admin > Employees
+3. WP Admin > Employee Taxonomies
+4. Front End > Single Employee
+5. Front End > Employee Archive
+6. Front End > Employee Widget
+7. Front End > Connected Listings
+7. Front End > Connected Agents
 
 == Changelog ==
 
