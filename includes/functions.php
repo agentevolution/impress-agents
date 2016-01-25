@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Holds miscellaneous functions for use in the IMPress Agents plugin
  *
@@ -95,7 +96,9 @@ function impa_employee_details() {
         $output .= sprintf('<p><a class="email" itemprop="email" href="mailto:%s">%s</a></p>', antispambot($email), antispambot($email) );
 
     if (get_post_meta($post->ID, '_employee_website', true) != '')
-        $output .= sprintf('<p><a class="website" itemprop="url" href="http://%s">%s</a></p>', get_post_meta($post->ID, '_employee_website', true), get_post_meta($post->ID, '_employee_website', true) );
+    	$website = esc_url(get_post_meta($post->ID, '_employee_website', true));
+    	$website_no_http = preg_replace('#^https?://#', '', rtrim($website,'/'));
+        $output .= sprintf('<p><a class="website" itemprop="url" href="%s">%s</a></p>', $website, $website_no_http );
 
     if (get_post_meta($post->ID, '_employee_city', true) != '' || get_post_meta($post->ID, '_employee_address', true) != '' || get_post_meta($post->ID, '_employee_state', true) != '' || get_post_meta($post->ID, '_employee_zip', true) != '' ) {
 
