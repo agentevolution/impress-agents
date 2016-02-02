@@ -34,6 +34,13 @@ function single_employee_post_content() {
 		<?php the_content(); ?>
 	</div><!-- .agent-bio -->
 
+	<?php if (function_exists('_p2p_init') && function_exists('agentpress_listings_init') || function_exists('_p2p_init') && function_exists('wp_listings_init')) {
+		echo'
+		<div class="connected-agent-listings">';
+		impa_connected_listings_markup();
+		echo '</div>';
+	}?>
+
 	</div><!-- .entry-content -->
 
 <?php
