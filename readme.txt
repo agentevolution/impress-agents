@@ -13,16 +13,13 @@ Employee Directory tailored for Real Estate Offices.
 
 == Description ==
 
-IMPress Agents provides you with a full employee directory, however it is ideal for Real Estate offices.
+IMPress Agents provides you with a full employee directory, that is ideal for Real Estate teams and offices.
 
-This plugin adds a custom post type for Employees with post meta fields for employee contact info. It uses included templates to display the contact info for single and archive pages, or these can be overridden in your theme.
+This plugin adds a custom post type for Employees with post meta fields for contact info. It uses included templates to display the contact info for single and archive pages, or these can be overridden in your theme.
 
-Adds taxonomies for Offices and Job Types to show employees by location and/or job title. Or add custom taxonmies to categorize to your needs. If using WP 4.4+, you can add images to taxonomy terms and display an image for an office, job title, or an custom taxonomy term.
+Adds taxonomies for Offices and Job Types to show employees by location and/or job title. Or add custom taxonomies to categorize to your needs. If using WP 4.4+, you can add images to taxonomy terms and display an image for an office, job title, or a custom taxonomy term.
 
 If using the [IMPress Listings](https://wordpress.org/plugins/wp-listings/) plugin, you can connect Employees to Listings. *Requires the [Posts 2 Posts](https://wordpress.org/plugins/posts-to-posts/) plugin*
-
-*Coming soon: Import agent details from the IDX API. Add more details and have them connected to imported listings from your [IDX Broker](http://www.idxbroker.com/) account!*
-*Coming soon: Add your favorite vendors!*
 
 == Installation ==
 
@@ -35,28 +32,20 @@ If using the [IMPress Listings](https://wordpress.org/plugins/wp-listings/) plug
 = I have a support issue, where do I go? =
 Just post to the support forum here (https://wordpress.org/support/plugin/impress-agents/)
 
-= Can I use this without an IDX account =
-Certainly! It functions as an employee directory, with or without an IDX account.
+= Can I use this without an IDX Broker account =
+Certainly! It functions as an employee directory, with or without an IDX Broker account.
 
 = How can I suggest improvements? =
 Just post to the support forum here on [wordpress.org](https://wordpress.org/support/plugin/impress-agents/) or developers can post to the [IMPress Agents Github repo](https://github.com/agentevolution/impress-agents).
 
 == Screenshots ==
-
 1. WP Admin > Add New
-
 2. WP Admin > Employees
-
 3. WP Admin > Employee Taxonomies
-
 4. WP Admin > Settings
-
 5. Front End > Single Employee
-
 6. Front End > Employee Archive
-
 7. Front End > Employee Widget
-
 8. Front End > Connected Listings
 
 == Changelog ==
