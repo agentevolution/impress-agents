@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * This file contains the IMPress_Agents_Taxonomies class.
  */

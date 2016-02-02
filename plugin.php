@@ -12,6 +12,8 @@
 	License URI: http://www.opensource.org/licenses/gpl-license.php
 */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 register_activation_hook( __FILE__, 'impress_agents_activation' );
 /**
  * This function runs on plugin activation. It flushes the rewrite rules to prevent 404's
@@ -98,13 +100,6 @@ function impress_agents_init() {
     /** Add admin scripts and styles */
     function impress_agents_admin_scripts_styles() {
         wp_enqueue_style( 'impress_agents_admin_css', IMPRESS_AGENTS_URL . 'includes/css/impress-agents-admin.css' );
-
-        /** Enqueue Font Awesome in the Admin if IDX Broker is not installed */
-		// if (!class_exists( 'Idx_Broker_Plugin' )) {
-		// 	wp_register_style('font-awesome-admin', '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', '', null, 'all');
-		// 	wp_enqueue_style('font-awesome-admin');
-		// 	wp_enqueue_style('upgrade-icon', IMPRESS_AGENTS_URL . 'includes/css/impress-agents-upgrade.css');
-		// }
 
 		wp_enqueue_script( 'impress-agents-admin', IMPRESS_AGENTS_URL . 'includes/js/admin.js', 'media-views' );
 

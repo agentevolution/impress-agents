@@ -11,12 +11,6 @@ function enqueue_single_employee_scripts() {
 	wp_enqueue_style( 'font-awesome' );
 }
 
-/** Set DNS Prefetch to improve performance on single listings templates */
-add_filter('wp_head','impress_agents_dnsprefetch', 0);
-function impress_agents_dnsprefetch() {
-    echo "\n<link rel='dns-prefetch' href='//maxcdn.bootstrapcdn.com' />\n"; // Loads FontAwesome
-}
-
 function single_employee_post_content() {
 	global $post;
 	?>
