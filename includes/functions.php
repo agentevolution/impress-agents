@@ -19,6 +19,23 @@ function impa_change_sort_order( $query ) {
     }
 }
 
+add_action( 'p2p_init', 'impa_employee_connection_types' );
+/**
+ * Connects employee post type to listing post type
+ */
+function impa_employee_connection_types() {
+
+    if ( ! post_type_exists('listing') || ! post_type_exists( 'employee' ) ) {
+        return;
+    }
+
+    p2p_register_connection_type( array(
+        'name' => 'agents_to_listings',
+        'from' => 'employee',
+        'to' => 'listing'
+    ) );
+}
+
 add_image_size( 'employee-thumbnail', 150, 200, true );
 add_image_size( 'employee-full', 300, 400, true );
 
@@ -91,14 +108,16 @@ function impa_employee_details() {
     if (get_post_meta($post->ID, '_employee_fax', true) != '')
         $output .= sprintf('<p class="tel fax" itemprop="faxNumber"><span class="type">Fax</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_fax', true) );
 
-    if (get_post_meta($post->ID, '_employee_email', true) != '')
+    if (get_post_meta($post->ID, '_employee_email', true) != '') {
         $email = get_post_meta($post->ID, '_employee_email', true);
         $output .= sprintf('<p><a class="email" itemprop="email" href="mailto:%s">%s</a></p>', antispambot($email), antispambot($email) );
+    }
 
-    if (get_post_meta($post->ID, '_employee_website', true) != '')
-    	$website = esc_url(get_post_meta($post->ID, '_employee_website', true));
+    if (get_post_meta($post->ID, '_employee_website', true) != '') {
+    	$website = get_post_meta($post->ID, '_employee_website', true);
     	$website_no_http = preg_replace('#^https?://#', '', rtrim($website,'/'));
         $output .= sprintf('<p><a class="website" itemprop="url" href="%s">%s</a></p>', $website, $website_no_http );
+    }
 
     if (get_post_meta($post->ID, '_employee_city', true) != '' || get_post_meta($post->ID, '_employee_address', true) != '' || get_post_meta($post->ID, '_employee_state', true) != '' || get_post_meta($post->ID, '_employee_zip', true) != '' ) {
 
@@ -270,6 +289,15 @@ function impress_agents_glance_items( $items = array() ) {
  */
 if ( class_exists( 'Jetpack_Omnisearch_Posts' ) ) {
 	new Jetpack_Omnisearch_Posts( 'employee' );
+}
+
+/**
+ * Add Employees to Jetpack sitemap
+ */
+add_filter( 'jetpack_sitemap_post_types', 'impress_agents_jetpack_sitemap' );
+function impress_agents_jetpack_sitemap() {
+	$post_types[] = 'employee';
+	return $post_types;
 }
 
 /**

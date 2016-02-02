@@ -68,6 +68,7 @@ function impress_agents_init() {
 	require_once( dirname( __FILE__ ) . '/includes/class-agents.php' );
 	require_once( dirname( __FILE__ ) . '/includes/class-taxonomies.php' );
 	require_once( dirname( __FILE__ ) . '/includes/class-employee-widget.php' );
+	require_once( dirname( __FILE__ ) . '/includes/class-agent-import.php' );
 
 	/** Add theme support for post thumbnails if it does not exist */
 	if(!current_theme_supports('post-thumbnails')) {
