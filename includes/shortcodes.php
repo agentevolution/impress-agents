@@ -45,9 +45,9 @@ function impa_profile_shortcode($atts, $content = null) {
         $output .= '<div class="shortcode-agent-details"><a class="fn" href="' . get_permalink() . '">' . get_the_title() . '</a>';
         $output .= impa_employee_details();
         if (function_exists('_p2p_init') && function_exists('agentpress_listings_init') || function_exists('_p2p_init') && function_exists('wp_listings_init')) {
-			$listings = impa_get_connected_posts_of_type('agents_to_listings');
-			if ( !empty($listings) ) {
-				echo '<p><a class="agent-listings-link" href="' . get_permalink() . '#agent-listings">View My Listings</a></p>';
+			$has_listings = impa_has_listings( $post->ID );
+			if (!empty($has_listings)) {
+			    echo '<p><a class="agent-listings-link" href="' . get_permalink() . '#agent-listings">View My Listings</a></p>';
 			}
 		}
 

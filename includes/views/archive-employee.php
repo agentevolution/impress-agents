@@ -13,16 +13,33 @@ function enqueue_single_employee_scripts() {
 	wp_enqueue_style( 'font-awesome' );
 }
 
+add_filter('body_class', 'add_body_class');
+
+function add_body_class($classes) {
+    $classes[] = 'archive-employee';
+    return $classes;
+}
+
 function archive_employee_loop() {
-	echo '<div class="employee-archive">';
 
 	$class = '';
+	$i = 4;
 
 	if ( have_posts() ) : while ( have_posts() ) : the_post();
 
-	// starting at 0
-	$class = ( $class == 'even agent-wrap' ) ? 'odd agent-wrap' : 'even agent-wrap';
+	// starting at 4
+	if ($i == 4) {
+		$class = 'first one-fourth agent-wrap';
+		$i = 0;
+	}
+	else {
+		$class = 'one-fourth agent-wrap';
+	}
 
+	//increase count by 1
+	$i++;
+
+	$post_id = get_the_id();
 	$thumb_id = get_post_thumbnail_id();
 	$thumb_url = wp_get_attachment_image_src($thumb_id, 'employee-thumbnail', true);
 
@@ -36,10 +53,10 @@ function archive_employee_loop() {
 		printf('<p><a class="fn" href="%s" itemprop="name">%s</a></p>', get_permalink(), get_the_title() );
 
 		echo impa_employee_archive_details();
-
 		if (function_exists('_p2p_init') && function_exists('agentpress_listings_init') || function_exists('_p2p_init') && function_exists('wp_listings_init')) {
-			$listings = impa_get_connected_posts_of_type('agents_to_listings');
-			if ( !empty($listings) ) {
+
+			$has_listings = impa_has_listings( $post_id );
+			if (!empty($has_listings)) {
 				echo '<p><a class="agent-listings-link" href="' . get_permalink() . '#agent-listings">View My Listings</a></p>';
 			}
 		}
@@ -63,8 +80,6 @@ function archive_employee_loop() {
 
 	<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
 	<?php endif;
-
-	echo '</div><!-- end .employee-archive -->';
 
 }
 
@@ -115,7 +130,7 @@ if($options['impress_agents_custom_wrapper'] && $options['impress_agents_start_w
 
 			echo $title; ?>
 
-            <small><?php if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb('<p id="breadcrumbs">','</p>'); } ?></small>
+			<small><?php if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb('<p id="breadcrumbs">','</p>'); } ?></small>
 		</header><!-- .archive-header -->
 
 	<?php
