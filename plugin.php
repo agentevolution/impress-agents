@@ -6,11 +6,13 @@
 	Author: Agent Evolution
 	Author URI: http://agentevolution.com
 
-	Version: 0.9.0
+	Version: 1.0.0
 
 	License: GNU General Public License v2.0 (or later)
 	License URI: http://www.opensource.org/licenses/gpl-license.php
 */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 register_activation_hook( __FILE__, 'impress_agents_activation' );
 /**
@@ -66,6 +68,7 @@ function impress_agents_init() {
 	require_once( dirname( __FILE__ ) . '/includes/class-agents.php' );
 	require_once( dirname( __FILE__ ) . '/includes/class-taxonomies.php' );
 	require_once( dirname( __FILE__ ) . '/includes/class-employee-widget.php' );
+	require_once( dirname( __FILE__ ) . '/includes/class-agent-import.php' );
 
 	/** Add theme support for post thumbnails if it does not exist */
 	if(!current_theme_supports('post-thumbnails')) {
@@ -98,13 +101,6 @@ function impress_agents_init() {
     /** Add admin scripts and styles */
     function impress_agents_admin_scripts_styles() {
         wp_enqueue_style( 'impress_agents_admin_css', IMPRESS_AGENTS_URL . 'includes/css/impress-agents-admin.css' );
-
-        /** Enqueue Font Awesome in the Admin if IDX Broker is not installed */
-		// if (!class_exists( 'Idx_Broker_Plugin' )) {
-		// 	wp_register_style('font-awesome-admin', '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', '', null, 'all');
-		// 	wp_enqueue_style('font-awesome-admin');
-		// 	wp_enqueue_style('upgrade-icon', IMPRESS_AGENTS_URL . 'includes/css/impress-agents-upgrade.css');
-		// }
 
 		wp_enqueue_script( 'impress-agents-admin', IMPRESS_AGENTS_URL . 'includes/js/admin.js', 'media-views' );
 

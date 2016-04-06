@@ -292,6 +292,15 @@ if ( class_exists( 'Jetpack_Omnisearch_Posts' ) ) {
 }
 
 /**
+ * Add Employees to Jetpack sitemap
+ */
+add_filter( 'jetpack_sitemap_post_types', 'impress_agents_jetpack_sitemap' );
+function impress_agents_jetpack_sitemap() {
+	$post_types[] = 'employee';
+	return $post_types;
+}
+
+/**
  * Function to return term image for use on front end
  * @param  num  $term_id the id of the term
  * @param  boolean $html    use html wrapper with wp_get_attachment_image

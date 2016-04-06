@@ -171,8 +171,6 @@ function impa_get_connected_posts_of_type($type) {
  */
 function impa_connected_listings_markup() {
 
-	echo apply_filters('impa_connected_listing_heading', $heading = '<h3><a name="agent-listings">My Listings</a></h3>');
-
 	$count = 0;
 
 	$listings = impa_get_connected_posts_of_type('agents_to_listings');
@@ -180,6 +178,8 @@ function impa_connected_listings_markup() {
 	if ( empty($listings) ) {
 		return;
 	}
+
+	echo apply_filters('impa_connected_listing_heading', $heading = '<h3><a name="agent-listings">My Listings</a></h3>');
 
 	global $post;
 
@@ -212,6 +212,19 @@ function impa_connected_listings_markup() {
 	echo '<div class="clearfix"></div>';
 
 	wp_reset_postdata();
+}
+
+/**
+ * Check if the agent post id has connected listings
+ */
+function impa_has_listings($post) {
+
+	$listings = impa_get_connected_posts_of_type_archive('agents_to_listings', $post);
+
+	if ( empty($listings) ) {
+		return false;
+	}
+	return true;
 }
 
 /**

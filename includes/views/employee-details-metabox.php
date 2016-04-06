@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 wp_nonce_field( 'impress_agents_metabox_save', 'impress_agents_metabox_nonce' );
 
 global $post;

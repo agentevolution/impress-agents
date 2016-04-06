@@ -24,6 +24,7 @@
 	position: relative;
 	height: auto;
 	overflow: hidden;
+	border: 0;
 }
 
 .agent-social-profiles {
