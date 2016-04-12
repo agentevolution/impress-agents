@@ -213,61 +213,59 @@ class IMPress_Agents_Import {
 		 */
 		$featured_image = $idx_agent_data['agentPhotoURL'];
 
-		if($update == false || $update_image == true) {
-			// Delete previously attached image
-			// if($update_image == true) {
-			// 	$post_featured_image_id = get_post_thumbnail_id( $id );
-			// 	wp_delete_attachment( $post_featured_image_id );
-			// }
+		if(isset($featured_image) && $featured_image != null) {
+			if($update == false || $update_image == true) {
+				// Delete previously attached image
+				$post_featured_image_id = get_post_thumbnail_id( $id );
+				wp_delete_attachment( $post_featured_image_id );
 
-			// Add Featured Image to Post
-			$image_url  = $featured_image; // Define the image URL here
-			$upload_dir = wp_upload_dir(); // Set upload folder
-			$image_data = file_get_contents($image_url); // Get image data
-			$filename   = basename(sanitize_file_name(strtolower( $idx_agent_data['agentDisplayName'] )) . '.jpg'); // Create image file name
+				// Add Featured Image to Post
+				$image_url  = $featured_image; // Define the image URL here
+				$upload_dir = wp_upload_dir(); // Set upload folder
+				$image_data = file_get_contents($image_url); // Get image data
+				$filename   = basename(sanitize_file_name(strtolower( $idx_agent_data['agentDisplayName'] )) . '.jpg'); // Create image file name
 
-			// Check folder permission and define file location
-			if( wp_mkdir_p( $upload_dir['path'] ) ) {
-				$file = $upload_dir['path'] . '/' . $filename;
-			} else {
-				$file = $upload_dir['basedir'] . '/' . $filename;
+				// Check folder permission and define file location
+				if( wp_mkdir_p( $upload_dir['path'] ) ) {
+					$file = $upload_dir['path'] . '/' . $filename;
+				} else {
+					$file = $upload_dir['basedir'] . '/' . $filename;
+				}
+
+				// Create the image file on the server
+				if(!file_exists($file))
+					file_put_contents( $file, $image_data );
+
+				// Check image file type
+				$wp_filetype = wp_check_filetype( $filename, null );
+
+				// Set attachment data
+				$attachment = array(
+					'post_mime_type' => $wp_filetype['type'],
+					'post_title'     => $idx_agent_data['agentDisplayName'] . ' - ' . $idx_agent_data['agentID'],
+					'post_content'   => '',
+					'post_status'    => 'inherit'
+				);
+
+				// Create the attachment
+				$attach_id = wp_insert_attachment( $attachment, $file, $id );
+
+				// Include image.php
+				require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+				// Define attachment metadata
+				$attach_data = wp_generate_attachment_metadata( $attach_id, $file );
+
+				// Assign metadata to attachment
+				wp_update_attachment_metadata( $attach_id, $attach_data );
+
+				// Assign featured image to post
+				set_post_thumbnail( $id, $attach_id );
 			}
 
-			// Create the image file on the server
-			if(!file_exists($file))
-				file_put_contents( $file, $image_data );
-
-			// Check image file type
-			$wp_filetype = wp_check_filetype( $filename, null );
-
-			// Set attachment data
-			$attachment = array(
-				'post_mime_type' => $wp_filetype['type'],
-				'post_title'     => $idx_agent_data['agentDisplayName'] . ' - ' . $idx_agent_data['agentID'],
-				'post_content'   => '',
-				'post_status'    => 'inherit'
-			);
-
-			// Create the attachment
-			$attach_id = wp_insert_attachment( $attachment, $file, $id );
-
-			// Include image.php
-			require_once(ABSPATH . 'wp-admin/includes/image.php');
-
-			// Define attachment metadata
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $file );
-
-			// Assign metadata to attachment
-			wp_update_attachment_metadata( $attach_id, $attach_data );
-
-			// Assign featured image to post
-			set_post_thumbnail( $id, $attach_id );
+			return true;
 		}
-
-		return true;
-
 	}
-
 }
 
 

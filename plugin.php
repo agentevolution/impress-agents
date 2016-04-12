@@ -6,7 +6,7 @@
 	Author: Agent Evolution
 	Author URI: http://agentevolution.com
 
-	Version: 1.0.0
+	Version: 1.0.1
 
 	License: GNU General Public License v2.0 (or later)
 	License URI: http://www.opensource.org/licenses/gpl-license.php
@@ -29,6 +29,7 @@ function impress_agents_activation() {
 			$_impress_agents->create_post_type();
 			$_impress_agents_taxonomies->register_taxonomies();
 		}
+
 		flush_rewrite_rules();
 }
 
@@ -37,7 +38,7 @@ register_deactivation_hook( __FILE__, 'impress_agents_deactivation' );
 /**
  * This function runs on plugin deactivation. It flushes the rewrite rules to get rid of remnants
  *
- * @since 1.0.8
+ * @since 0.9.0
  */
 function impress_agents_deactivation() {
 		flush_rewrite_rules();
@@ -56,7 +57,7 @@ function impress_agents_init() {
 	global $_impress_agents, $_impress_agents_taxonomies;
 
 	define( 'IMPRESS_AGENTS_URL', plugin_dir_url( __FILE__ ) );
-	define( 'IMPRESS_AGENTS_VERSION', '0.9.0' );
+	define( 'IMPRESS_AGENTS_VERSION', '1.0.1' );
 
 	/** Load textdomain for translation */
 	load_plugin_textdomain( 'impress_agents', false, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -69,6 +70,7 @@ function impress_agents_init() {
 	require_once( dirname( __FILE__ ) . '/includes/class-taxonomies.php' );
 	require_once( dirname( __FILE__ ) . '/includes/class-employee-widget.php' );
 	require_once( dirname( __FILE__ ) . '/includes/class-agent-import.php' );
+	require_once( dirname( __FILE__ ) . '/includes/class-migrate-old-posts.php' );
 
 	/** Add theme support for post thumbnails if it does not exist */
 	if(!current_theme_supports('post-thumbnails')) {
@@ -83,6 +85,7 @@ function impress_agents_init() {
 
 		/** Register Font Awesome icons but don't enqueue them */
 		wp_register_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', '', null, 'all');
+		wp_enqueue_style('font-awesome');
 
 		if ( !isset($options['impress_agents_stylesheet_load']) ) {
 			$options['impress_agents_stylesheet_load'] = 0;
@@ -123,6 +126,13 @@ function impress_agents_init() {
 
 	add_action( 'widgets_init', 'impress_agents_register_widgets' );
 
+	if(is_plugin_active('genesis-agent-profiles/plugin.php')) {
+		add_action( 'wp_loaded', 'impress_agents_migrate' );
+	}
+}
+
+function impress_agents_migrate() {
+	new IMPress_Agents_Migrate();
 }
 
 /**
