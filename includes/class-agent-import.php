@@ -140,7 +140,7 @@ class IMPress_Agents_Import {
 				} elseif( isset($idx_agent_wp_options[$a['agentID']]['post_id']) ) {
 					// Update agent data
 					if(!isset($impa_options['impress_agents_idx_update']) || isset($impa_options['impress_agents_idx_update']) && $impa_options['impress_agents_idx_update'] != 'update-none')
-						self::impress_agents_idx_insert_post_meta($idx_agent_wp_options[$a['agentID']]['post_id'], $a, true, ($impa_options['impress_agents_idx_update'] == 'update-noimage') ? false : true );
+						self::impress_agents_idx_insert_post_meta($idx_agent_wp_options[$a['agentID']]['post_id'], $a, true, false );
 					$idx_agent_wp_options[$a['agentID']]['updated'] = date("m/d/Y h:i:sa");
 				}
 			}
@@ -176,25 +176,24 @@ class IMPress_Agents_Import {
 		wp_set_object_terms($id, $idx_agent_data['agentTitle'], 'job-types');
 
 		// Add post meta for existing fields
-		update_post_meta($id, '_employee_title', $idx_agent_data['agentTitle']);
-		update_post_meta($id, '_employee_first_name', $idx_agent_data['agentFirstName']);
-		update_post_meta($id, '_employee_last_name', $idx_agent_data['agentLastName']);
-		update_post_meta($id, '_employee_agent_id', $idx_agent_data['agentID']);
-		update_post_meta($id, '_employee_phone', $idx_agent_data['agentContactPhone']);
-		update_post_meta($id, '_employee_mobile', $idx_agent_data['agentCellPhone']);
-		update_post_meta($id, '_employee_email', $idx_agent_data['agentEmail']);
-		update_post_meta($id, '_employee_website', $idx_agent_data['agentURL']);
-		update_post_meta($id, '_employee_address', $idx_agent_data['address']);
-		update_post_meta($id, '_employee_city', $idx_agent_data['city']);
-		update_post_meta($id, '_employee_state', $idx_agent_data['stateProvince']);
-		update_post_meta($id, '_employee_zip', $idx_agent_data['zipCode']);
+		if(get_post_meta($id, '_employee_title') == false) { update_post_meta($id, '_employee_title', $idx_agent_data['agentTitle']); }
+		if(get_post_meta($id, '_employee_first_name') == false) { update_post_meta($id, '_employee_first_name', $idx_agent_data['agentFirstName']); }
+		if(get_post_meta($id, '_employee_last_name') == false) { update_post_meta($id, '_employee_last_name', $idx_agent_data['agentLastName']); }
+		if(get_post_meta($id, '_employee_agent_id') == false) { update_post_meta($id, '_employee_agent_id', $idx_agent_data['agentID']); }
+		if(get_post_meta($id, '_employee_phone') == false) { update_post_meta($id, '_employee_phone', $idx_agent_data['agentContactPhone']); }
+		if(get_post_meta($id, '_employee_mobile') == false) { update_post_meta($id, '_employee_mobile', $idx_agent_data['agentCellPhone']); }
+		if(get_post_meta($id, '_employee_email') == false) { update_post_meta($id, '_employee_email', $idx_agent_data['agentEmail']); }
+		if(get_post_meta($id, '_employee_website') == false) { update_post_meta($id, '_employee_website', $idx_agent_data['agentURL']); }
+		if(get_post_meta($id, '_employee_address') == false) { update_post_meta($id, '_employee_address', $idx_agent_data['address']); }
+		if(get_post_meta($id, '_employee_city') == false) { update_post_meta($id, '_employee_city', $idx_agent_data['city']); }
+		if(get_post_meta($id, '_employee_state') == false) { update_post_meta($id, '_employee_state', $idx_agent_data['stateProvince']); }
+		if(get_post_meta($id, '_employee_zip') == false) { update_post_meta($id, '_employee_zip', $idx_agent_data['zipCode']); }
 
 		foreach ($idx_agent_data as $metakey => $metavalue) {
-			if ($update == true) {
-				delete_post_meta($id, '_employee_' . strtolower($metakey));
-			}
 			if(isset($metavalue) && !is_array($metavalue) && $metavalue != '') {
-				update_post_meta($id, '_employee_' . strtolower($metakey), $metavalue);
+				if(get_post_meta($id, '_employee_' . strtolower($metakey)) == false) {
+					update_post_meta($id, '_employee_' . strtolower($metakey), $metavalue);
+				}
 			} elseif(isset( $metavalue ) && is_array( $metavalue )) {
 				foreach ($metavalue as $key => $value) {
 					if(get_post_meta($id, '_employee_' . strtolower($metakey))) {
