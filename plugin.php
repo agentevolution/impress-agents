@@ -126,6 +126,9 @@ function impress_agents_init() {
 
 	add_action( 'widgets_init', 'impress_agents_register_widgets' );
 
+        /** Make sure is_plugin_active() can be called */
+        include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
 	if(is_plugin_active('genesis-agent-profiles/plugin.php')) {
 		add_action( 'wp_loaded', 'impress_agents_migrate' );
 	}
