@@ -5,7 +5,7 @@ Contributors: agentevolution, davebonds, chadajohnson, idxco
 Tags: agents, employees, employee directory, agent directory, agents, idx broker, idx, impress
 Requires at least: 4.3.0
 Tested up to: 4.4.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,9 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 8. Front End > Connected Listings
 
 == Changelog ==
+= 1.0.2 =
+* Fix: Fatal error when calling is_plugin_active
+
 = 1.0.1 =
 * Fix: Issue with imported agents creating duplicate images.
 * Added: Automatic migration of posts from Genesis Agent Profiles to IMPress Agents
