@@ -6,7 +6,7 @@
 	Author: Agent Evolution
 	Author URI: http://agentevolution.com
 
-	Version: 1.0.1
+	Version: 1.0.2
 
 	License: GNU General Public License v2.0 (or later)
 	License URI: http://www.opensource.org/licenses/gpl-license.php
@@ -57,7 +57,7 @@ function impress_agents_init() {
 	global $_impress_agents, $_impress_agents_taxonomies;
 
 	define( 'IMPRESS_AGENTS_URL', plugin_dir_url( __FILE__ ) );
-	define( 'IMPRESS_AGENTS_VERSION', '1.0.1' );
+	define( 'IMPRESS_AGENTS_VERSION', '1.0.2' );
 
 	/** Load textdomain for translation */
 	load_plugin_textdomain( 'impress_agents', false, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -125,6 +125,9 @@ function impress_agents_init() {
 	$_impress_agents_taxonomies = new IMPress_Agents_Taxonomies;
 
 	add_action( 'widgets_init', 'impress_agents_register_widgets' );
+
+	/** Make sure is_plugin_active() can be called */
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 	if(is_plugin_active('genesis-agent-profiles/plugin.php')) {
 		add_action( 'wp_loaded', 'impress_agents_migrate' );
