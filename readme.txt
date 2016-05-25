@@ -49,6 +49,14 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 8. Front End > Connected Listings
 
 == Changelog ==
+= 1.1 =
+Released 05.26.2016
+* Added: Posts 2 Posts functionality to connect to IMPress Listings
+* Added: Order and Orderby parameters to Featured Agent widget and shortcode
+* Added: Ability to show random agent in Featured Agent widget
+* Added: Display link to listings on Archive page if Agent has listings
+* Updated: Improved responsive CSS
+
 = 1.0.2 =
 * Fix: Fatal error when calling is_plugin_active
 
