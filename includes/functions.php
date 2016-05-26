@@ -50,8 +50,6 @@ function impress_agents_template_include( $template ) {
 		if ( file_exists(get_stylesheet_directory() . '/search-' . $post_type . '.php') ) {
 			$template = get_stylesheet_directory() . '/search-' . $post_type . '.php';
 			return $template;
-		} elseif ( file_exists(get_stylesheet_directory() . '/search.php' ) ) {
-			return get_stylesheet_directory() . '/search.php';
 		} else {
 			return dirname( __FILE__ ) . '/views/archive-' . $post_type . '.php';
 		}
@@ -105,9 +103,6 @@ function impa_employee_details() {
     if (get_post_meta($post->ID, '_employee_mobile', true) != '')
         $output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Cell</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_mobile', true) );
 
-    if (get_post_meta($post->ID, '_employee_fax', true) != '')
-        $output .= sprintf('<p class="tel fax" itemprop="faxNumber"><span class="type">Fax</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_fax', true) );
-
     if (get_post_meta($post->ID, '_employee_email', true) != '') {
         $email = get_post_meta($post->ID, '_employee_email', true);
         $output .= sprintf('<p><a class="email" itemprop="email" href="mailto:%s">%s</a></p>', antispambot($email), antispambot($email) );
@@ -145,6 +140,32 @@ function impa_employee_details() {
             $output .= $address;
         }
     }
+
+    return $output;
+}
+
+function impa_employee_archive_details() {
+	global $post;
+
+    $output = '';
+
+    if (get_post_meta($post->ID, '_employee_title', true) != '')
+        $output .= sprintf('<p class="title" itemprop="jobTitle">%s</p>', get_post_meta($post->ID, '_employee_title', true) );
+
+    if (get_post_meta($post->ID, '_employee_phone', true) != '')
+        $output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Office</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_phone', true) );
+
+    if (get_post_meta($post->ID, '_employee_email', true) != '') {
+        $email = get_post_meta($post->ID, '_employee_email', true);
+        $output .= sprintf('<p><a class="email" itemprop="email" href="mailto:%s">%s</a></p>', antispambot($email), antispambot($email) );
+    }
+
+    if (function_exists('_p2p_init') && function_exists('agentpress_listings_init') || function_exists('_p2p_init') && function_exists('wp_listings_init')) {
+		$listings = impa_get_connected_posts_of_type('agents_to_listings');
+		if ( !empty($listings) ) {
+			echo '<p><a class="agent-listings-link" href="' . get_permalink() . '#agent-listings">View My Listings</a></p>';
+		}
+	}
 
     return $output;
 }

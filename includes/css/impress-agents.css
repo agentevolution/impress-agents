@@ -1,26 +1,58 @@
 /* ====== Structure ====== */
 
-.employee-archive .agent-wrap {
-	float: right;
-	clear: right;
-	width: auto;
-	margin: 0 0 70px;
-	width: 47%;
+/* =Column classes
+------------------------------------------------------------ */
+
+.archive-employee .one-half,
+.archive-employee .one-third,
+.archive-employee .one-fourth,
+.archive-employee .one-fifth,
+.archive-employee .one-sixth {
+	float: left;
+	margin: 0 0 15px 2.564102564102564%;
+	padding: 0;
 }
 
-.employee-archive .agent-wrap.even {
-	border: 0;
-	float: left;
-	clear: left;
+.archive-employee .one-half {
+	width: 48.717948717948715%;
 }
 
-.agent-details {
-	float: left;
+.archive-employee .one-third {
+	width: 31.623931623931625%;
+}
+
+.archive-employee .one-fourth {
+	width: 23.076923076923077%;
+}
+
+.archive-employee .one-fifth {
+	width: 17.948717948717948%;
+}
+
+.archive-employee .one-sixth {
+	width: 14.52991452991453%;
+}
+
+.archive-employee .first {
+	clear: both;
+	margin-left: 0;
+}
+
+/* =Single and Archive Employee template
+------------------------------------------------------------ */
+
+.archive-employee .agent-wrap {
+	text-align: center;
+	padding: 10px;
+}
+
+.single-employee .agent-details {
+	float: none;
 	position: relative;
 }
 
 .single-employee .agent-details,
-.employee-archive .agent-details {
+.archive-employee .agent-details {
 	position: relative;
 	height: auto;
 	overflow: hidden;
@@ -37,7 +69,7 @@
 	padding-top: 30px;
 }
 
-.employee-archive .agent-details p {
+.archive-employee .agent-details p {
 	font-size: 1em;
 	line-height: 150%;
 	padding: 0;
@@ -97,7 +129,7 @@
 	font-weight: 700;
 }
 
-/* ====== Structure (single listing if connected) ====== */
+/* ====== Connected listings ====== */
 
 .single-listing .connected-agents {
 	background: #f5f5f5;
@@ -127,14 +159,14 @@
 
 /* ====== Hyperlinks ====== */
 
-.employee-archive a.fn {
-	font-size: 1.5em;
+.archive-employee a.fn {
+	font-size: 1.2em;
 	margin-bottom: 10px;
 	display: block;
 }
 
-.employee-archive a,
-.employee-archive a:hover,
+.archive-employee a,
+.archive-employee a:hover,
 .single-employee .agent-details a,
 .single-employee .agent-details a:hover,
 .agent-social-profiles a:hover,
@@ -146,12 +178,13 @@
 	display: inline-block;
 	margin-right: 5px;
 	font-size: 18px;
+	text-decoration: none;
 }
 
 /* ====== Images ====== */
 
 .single-employee .agent-wrap img,
-.employee-archive .agent-wrap img,
+.archive-employee .agent-wrap img,
 .single-listing .connected-agents img {
 	float: left;
 	border: 1px solid #efefef;
@@ -160,6 +193,12 @@
 	-khtml-box-shadow: 2px 2px 3px #DDD;
 	box-shadow: 2px 2px 3px #DDD;
 	margin-right: 20px;
+}
+
+.archive-employee .agent-wrap img {
+	float: none;
+	display: block;
+	margin: 0 auto 10px;
 }
 
 
@@ -178,31 +217,28 @@
 
 .featured-agent .widget-wrap {overflow: hidden;}
 
-.employee-archive .navigation {clear: both;}
+.archive-employee .navigation {clear: both;}
 
 /* ====== Widget ====== */
 
 .widget.featured-employee {
 	overflow: hidden;
 }
+.widget.featured-employee .widget-agent-wrap {
+	display: block;
+}
 .widget.featured-employee img {
-	float: left;
+	display: block;
+	float: none;
 	clear: left;
-	width: 80px;
+	max-width: 120px;
 	height: auto;
-	margin-right: 10px;
-	margin-bottom: 10px;
+	margin: 0 auto 10px;
 	border: 1px solid #efefef;
-	-moz-box-shadow: 2px 2px 3px #DDD;
-	-webkit-box-shadow: 2px 2px 3px #DDD;
-	-khtml-box-shadow: 2px 2px 3px #DDD;
-	box-shadow: 2px 2px 3px #DDD;
+	box-shadow: 1px 1px 2px #DDD;
 }
 
 .widget.featured-employee p {
-	font-size: 1em;
-	line-height: 170%;
-	text-align: left;
 	padding: 0;
 	margin: 0;
 }
@@ -212,7 +248,8 @@
 }
 
 .widget-agent-details {
-	float: left;
+	float: none;
+	text-align: center;
 }
 
 .widget-agent-details p {
@@ -270,6 +307,64 @@
 
 
 /* ====== Responsive ====== */
+
+@media (max-width: 960px) {
+	.archive-employee .one-fourth {
+		margin: 0 0.6% 15px;
+		width: 48.717948717948715%;
+	}
+}
+
+@media (max-width: 800px) {
+	.archive-employee .one-half,
+	.archive-employee .one-third,
+	.archive-employee .two-thirds,
+	.archive-employee .one-fourth,
+	.archive-employee .three-fourths,
+	.archive-employee .one-fifth,
+	.archive-employee .two-fifths,
+	.archive-employee .three-fifths,
+	.archive-employee .four-fifths,
+	.archive-employee .one-sixth,
+	.archive-employee .five-sixths {
+		float: none;
+		width: 100%;
+		padding: 0;
+		margin: 0 0 25px;
+	}
+}
+
+@media (max-width: 600px) {
+	.archive-employee .one-half,
+	.archive-employee .one-third,
+	.archive-employee .two-thirds,
+	.archive-employee .one-fourth,
+	.archive-employee .three-fourths,
+	.archive-employee .one-fifth,
+	.archive-employee .two-fifths,
+	.archive-employee .three-fifths,
+	.archive-employee .four-fifths,
+	.archive-employee .one-sixth,
+	.archive-employee .five-sixths {
+		float: none;
+		width: 100%;
+		padding: 0;
+		margin: 0 0 25px;
+	}
+	.single-employee .agent-wrap img,
+	.archive-employee .agent-wrap img,
+	.single-listing .connected-agents img {
+		float: none;
+	}
+	.single-employee .agent-wrap img {
+		display: block;
+		margin: 0 auto 15px;
+	}
+	.single-employee .agent-details,
+	.archive-employee .agent-details {
+		text-align: center;
+	}
+}
 
 /* Landscape phones and down */
 @media (max-width: 480px) {

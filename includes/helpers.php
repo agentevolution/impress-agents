@@ -167,6 +167,29 @@ function impa_get_connected_posts_of_type($type) {
 }
 
 /**
+ * Returns an array of posts of connected $type using the $post object
+ * instead of get_queried_object()
+ *
+ * @param string $type the connected_type
+ * @param  int $post the post id
+ * @return array|bool array of posts if any else false
+ */
+function impa_get_connected_posts_of_type_archive($type, $post) {
+
+    $connected = get_posts( array(
+        'connected_type'  => $type,
+        'connected_items' => $post,
+        'nopaging'        => true
+    ) );
+
+    if ( empty($connected) ) {
+        return false;
+    }
+
+    return $connected;
+}
+
+/**
  * Outputs markup for the connected listings on single agents
  */
 function impa_connected_listings_markup() {
@@ -212,6 +235,33 @@ function impa_connected_listings_markup() {
 	echo '<div class="clearfix"></div>';
 
 	wp_reset_postdata();
+
+}
+
+/**
+ * Check if the agent post id has connected listings
+ */
+function impa_has_listings($post) {
+
+	$listings = impa_get_connected_posts_of_type_archive('agents_to_listings', $post);
+
+	if ( empty($listings) ) {
+		return false;
+	}
+	return true;
+}
+
+/**
+ * Check if the agent post id has connected listings
+ */
+function impa_has_listings($post) {
+
+	$listings = impa_get_connected_posts_of_type_archive('agents_to_listings', $post);
+
+	if ( empty($listings) ) {
+		return false;
+	}
+	return true;
 }
 
 /**
