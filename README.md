@@ -9,7 +9,7 @@ Author URL: http://www.agentevolution.com/
 
 **Tested up to:** 4.4.1
 
-**Stable tag:** 1.0.2
+**Stable tag:** 1.1.0
 
 **License:** GPLv2 or later
 
@@ -92,7 +92,7 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 
 ## Changelog ##
 
-### 1.1 ###
+### 1.1.0 ###
 Released 05.26.2016
 * Added: Posts 2 Posts functionality to connect to IMPress Listings
 * Added: Order and Orderby parameters to Featured Agent widget and shortcode

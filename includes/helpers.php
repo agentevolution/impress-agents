@@ -252,19 +252,6 @@ function impa_has_listings($post) {
 }
 
 /**
- * Check if the agent post id has connected listings
- */
-function impa_has_listings($post) {
-
-	$listings = impa_get_connected_posts_of_type_archive('agents_to_listings', $post);
-
-	if ( empty($listings) ) {
-		return false;
-	}
-	return true;
-}
-
-/**
  * Outputs markup for the connected agents on single listings
  */
 function impa_connected_agents_markup() {

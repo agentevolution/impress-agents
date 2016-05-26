@@ -5,7 +5,7 @@ Contributors: agentevolution, davebonds, chadajohnson, idxco
 Tags: agents, employees, employee directory, agent directory, agents, idx broker, idx, impress
 Requires at least: 4.3.0
 Tested up to: 4.4.1
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,7 +49,7 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 8. Front End > Connected Listings
 
 == Changelog ==
-= 1.1 =
+= 1.1.0 =
 Released 05.26.2016
 * Added: Posts 2 Posts functionality to connect to IMPress Listings
 * Added: Order and Orderby parameters to Featured Agent widget and shortcode
