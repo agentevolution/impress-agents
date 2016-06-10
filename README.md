@@ -1,4 +1,9 @@
 # IMPress Agents #
+
+[![Code Climate](https://codeclimate.com/github/agentevolution/impress-agents/badges/gpa.svg)](https://codeclimate.com/github/agentevolution/impress-agents)
+[![Test Coverage](https://codeclimate.com/github/agentevolution/impress-agents/badges/coverage.svg)](https://codeclimate.com/github/agentevolution/impress-agents/coverage)
+[![Issue Count](https://codeclimate.com/github/agentevolution/impress-agents/badges/issue_count.svg)](https://codeclimate.com/github/agentevolution/impress-agents)
+
 Author: Agent Evolution
 Author URL: http://www.agentevolution.com/
 **Contributors:** agentevolution, davebonds, chadajohnson, idxco
