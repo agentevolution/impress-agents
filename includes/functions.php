@@ -32,7 +32,8 @@ function impa_employee_connection_types() {
     p2p_register_connection_type( array(
         'name' => 'agents_to_listings',
         'from' => 'employee',
-        'to' => 'listing'
+        'to' => 'listing',
+        'sortable' => 'any'
     ) );
 }
 
