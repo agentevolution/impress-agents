@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class IMPress_Agents_Widget extends WP_Widget {
 
-	function IMPress_Agents_Widget() {
+	function __construct() {
 		$widget_ops = array( 'classname' => 'featured-employee', 'description' => __( 'Display a featured employee or employees contact info.', 'impress_agents' ) );
 		$control_ops = array( 'width' => 300, 'height' => 350 );
 		parent::__construct( 'featured-employee', __( 'IMPress Agents', 'impress_agents' ), $widget_ops, $control_ops );
