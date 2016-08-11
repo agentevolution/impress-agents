@@ -135,9 +135,7 @@ class IMPress_Agents_Import {
 		foreach ( $agents as $agent ) {
 			foreach($agent as $a) {
 
-				if( isset($idx_agent_wp_options[$a['agentID']]['post_id']) && $idx_agent_wp_options[$a['agentID']]['agentID'] != $a['agentID'] ) {
-					self::impress_agents_idx_change_post_status($idx_agent_wp_options[$a['agentID']]['post_id'], 'draft');
-				} elseif( isset($idx_agent_wp_options[$a['agentID']]['post_id']) ) {
+				if( isset($idx_agent_wp_options[$a['agentID']]['post_id']) ) {
 					// Update agent data
 					if(!isset($impa_options['impress_agents_idx_update']) || isset($impa_options['impress_agents_idx_update']) && $impa_options['impress_agents_idx_update'] != 'update-none')
 						self::impress_agents_idx_insert_post_meta($idx_agent_wp_options[$a['agentID']]['post_id'], $a, true, false );
