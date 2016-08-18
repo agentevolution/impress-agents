@@ -7,9 +7,9 @@ Author URL: http://www.agentevolution.com/
 
 **Requires at least:** 4.3.0
 
-**Tested up to:** 4.4.1
+**Tested up to:** 4.6
 
-**Stable tag:** 1.1.0
+**Stable tag:** 1.1.1
 
 **License:** GPLv2 or later
 
@@ -91,6 +91,11 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 
 
 ## Changelog ##
+
+### 1.1.1 ###
+Released 08.18.2016
+* Fix: Update for PHP7 compatibility
+* Fix: Issue with imported agents changing to draft
 
 ### 1.1.0 ###
 Released 05.26.2016
