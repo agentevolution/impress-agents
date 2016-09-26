@@ -4,8 +4,8 @@ Author URL: http://www.agentevolution.com/
 Contributors: agentevolution, davebonds, chadajohnson, idxco
 Tags: agents, employees, employee directory, agent directory, agents, idx broker, idx, impress
 Requires at least: 4.3.0
-Tested up to: 4.6
-Stable tag: 1.1.1
+Tested up to: 4.6.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,13 +50,17 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 
 == Changelog ==
 
+= 1.1.2 =
+* Released 09.26.2016
+* Fix: Update npmcdn link with unpkg link for external scripts
+
 = 1.1.1 =
-Released 08.18.2016
+* Released 08.18.2016
 * Fix: Update for PHP7 compatibility
 * Fix: Issue with imported agents changing to draft
 
 = 1.1.0 =
-Released 05.26.2016
+* Released 05.26.2016
 * Added: Posts 2 Posts functionality to connect to IMPress Listings
 * Added: Order and Orderby parameters to Featured Agent widget and shortcode
 * Added: Ability to show random agent in Featured Agent widget
