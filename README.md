@@ -7,9 +7,9 @@ Author URL: http://www.agentevolution.com/
 
 **Requires at least:** 4.3.0
 
-**Tested up to:** 4.6
+**Tested up to:** 4.6.1
 
-**Stable tag:** 1.1.1
+**Stable tag:** 1.1.2
 
 **License:** GPLv2 or later
 
@@ -91,6 +91,10 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 
 
 ## Changelog ##
+
+### 1.1.2 ###
+* Released 09.26.2016
+* Fix: Update npmcdn link with unpkg link for external scripts
 
 ### 1.1.1 ###
 Released 08.18.2016
