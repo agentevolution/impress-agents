@@ -5,7 +5,7 @@ Contributors: agentevolution, davebonds, chadajohnson, idxco
 Tags: agents, employees, employee directory, agent directory, agents, idx broker, idx, impress
 Requires at least: 4.3.0
 Tested up to: 4.6.1
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,11 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 8. Front End > Connected Listings
 
 == Changelog ==
+
+= 1.1.3 =
+* Released 12.22.2016
+* Added: Support for selective refresh of widgets
+* Fix: Added sortable parameter when registering post type connections
 
 = 1.1.2 =
 * Released 09.26.2016
