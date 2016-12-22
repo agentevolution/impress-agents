@@ -284,6 +284,10 @@ function impress_agents_idx_agent_register_settings() {
 
 add_action( 'admin_enqueue_scripts', 'impress_agents_idx_agent_scripts' );
 function impress_agents_idx_agent_scripts() {
+	$screen = get_current_screen();
+	if($screen->id != 'employee_page_impa-idx-agent')
+		return;
+
 	wp_enqueue_script( 'impress_agents_idx_agent_delete_script', IMPRESS_AGENTS_URL . 'includes/js/admin-agent-import.js', array( 'jquery' ), true );
 	wp_enqueue_script( 'jquery-masonry' );
 	wp_enqueue_script( 'images-loaded', 'https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js' );

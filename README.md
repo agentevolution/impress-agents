@@ -9,7 +9,7 @@ Author URL: http://www.agentevolution.com/
 
 **Tested up to:** 4.6.1
 
-**Stable tag:** 1.1.2
+**Stable tag:** 1.1.3
 
 **License:** GPLv2 or later
 
@@ -91,6 +91,11 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 
 
 ## Changelog ##
+
+= 1.1.3 =
+* Released 12.22.2016
+* Added: Support for selective refresh of widgets
+* Fix: Added sortable parameter when registering post type connections
 
 ### 1.1.2 ###
 * Released 09.26.2016
