@@ -84,8 +84,8 @@ function impress_agents_init() {
 		$options = get_option('plugin_impress_agents_settings');
 
 		/** Register Font Awesome icons but don't enqueue them */
-		wp_register_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', '', null, 'all');
-		wp_enqueue_style('font-awesome');
+		wp_register_style( 'impress-agents-font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', '', null, 'all' );
+		wp_enqueue_style( 'impress-agents-font-awesome' );
 
 		if ( !isset($options['impress_agents_stylesheet_load']) ) {
 			$options['impress_agents_stylesheet_load'] = 0;
