@@ -8,7 +8,11 @@
 
 add_action('wp_enqueue_scripts', 'enqueue_single_employee_scripts');
 function enqueue_single_employee_scripts() {
+<<<<<<< HEAD
 	wp_enqueue_style( 'font-awesome-4.7.0', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(), '4.7.0' );
+=======
+	wp_enqueue_style( 'impress-agents-font-awesome' );
+>>>>>>> 60ae6e86cf47bc8ca4a94a0b12ab84924faf06ce
 }
 
 function single_employee_post_content() {
