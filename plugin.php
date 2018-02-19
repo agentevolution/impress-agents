@@ -84,9 +84,7 @@ function impress_agents_init() {
 		$options = get_option('plugin_impress_agents_settings');
 
 		/** Register Font Awesome icons but don't enqueue them */
-		// Uhh, why are we then enqueuing them immediately?
 		wp_register_style( 'font-awesome-4.7.0', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(), '4.7.0' );
-		wp_enqueue_style( 'font-awesome-4.7.0' );
 
 		if ( !isset($options['impress_agents_stylesheet_load']) ) {
 			$options['impress_agents_stylesheet_load'] = 0;
