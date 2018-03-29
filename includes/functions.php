@@ -10,13 +10,11 @@ add_action( 'pre_get_posts', 'impa_change_sort_order' );
  */
 function impa_change_sort_order( $query ) {
 
-    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-
-    if( $query->is_main_query() && !is_admin() && is_post_type_archive( 'employee' ) || is_tax() ) {
-        $query->set( 'orderby', 'menu_order' );
-        $query->set( 'order', 'ASC' );
-        $query->set( 'paged', $paged );
-    }
+	if( $query->is_main_query() && !is_admin() && is_post_type_archive( 'employee' ) || is_tax() ) {
+		$query->set( 'meta_key', '_employee_last_name' );
+		$query->set( 'orderby', 'meta_value' );
+		$query->set( 'order', 'ASC' );
+	}
 }
 
 add_action( 'p2p_init', 'impa_employee_connection_types' );
@@ -25,16 +23,16 @@ add_action( 'p2p_init', 'impa_employee_connection_types' );
  */
 function impa_employee_connection_types() {
 
-    if ( ! post_type_exists('listing') || ! post_type_exists( 'employee' ) ) {
-        return;
-    }
+	if ( ! post_type_exists('listing') || ! post_type_exists( 'employee' ) ) {
+		return;
+	}
 
-    p2p_register_connection_type( array(
-        'name'      => 'agents_to_listings',
-        'from'      => 'employee',
-        'to'        => 'listing',
-        'sortable'  => 'any'
-    ) );
+	p2p_register_connection_type( array(
+		'name'      => 'agents_to_listings',
+		'from'      => 'employee',
+		'to'        => 'listing',
+		'sortable'  => 'any'
+	) );
 }
 
 add_image_size( 'employee-thumbnail', 150, 200, true );
@@ -55,15 +53,15 @@ function impress_agents_template_include( $template ) {
 			return dirname( __FILE__ ) . '/views/archive-' . $post_type . '.php';
 		}
 	}
-    if ( impress_agents_is_taxonomy_of($post_type) ) {
-    	if ( file_exists(get_stylesheet_directory() . '/taxonomy-' . $post_type . '.php' ) ) {
-    	    return get_stylesheet_directory() . '/taxonomy-' . $post_type . '.php';
-    	} elseif ( file_exists(get_stylesheet_directory() . '/archive-' . $post_type . '.php' ) ) {
-        	return get_stylesheet_directory() . '/archive-' . $post_type . '.php';
-        } else {
-            return dirname( __FILE__ ) . '/views/archive-' . $post_type . '.php';
-        }
-    }
+	if ( impress_agents_is_taxonomy_of($post_type) ) {
+		if ( file_exists(get_stylesheet_directory() . '/taxonomy-' . $post_type . '.php' ) ) {
+			return get_stylesheet_directory() . '/taxonomy-' . $post_type . '.php';
+		} elseif ( file_exists(get_stylesheet_directory() . '/archive-' . $post_type . '.php' ) ) {
+			return get_stylesheet_directory() . '/archive-' . $post_type . '.php';
+		} else {
+			return dirname( __FILE__ ) . '/views/archive-' . $post_type . '.php';
+		}
+	}
 
 	if ( is_post_type_archive( $post_type ) ) {
 		if ( file_exists(get_stylesheet_directory() . '/archive-' . $post_type . '.php') ) {
@@ -87,129 +85,129 @@ function impress_agents_template_include( $template ) {
 function impa_employee_details() {
 	global $post;
 
-    $output = '';
+	$output = '';
 
-    if (get_post_meta($post->ID, '_employee_title', true) != '')
-        $output .= sprintf('<p class="title" itemprop="jobTitle">%s</p>', get_post_meta($post->ID, '_employee_title', true) );
+	if (get_post_meta($post->ID, '_employee_title', true) != '')
+		$output .= sprintf('<p class="title" itemprop="jobTitle">%s</p>', get_post_meta($post->ID, '_employee_title', true) );
 
-    if (get_post_meta($post->ID, '_employee_license', true) != '')
-        $output .= sprintf('<p class="license">%s</p>', get_post_meta($post->ID, '_employee_license', true) );
+	if (get_post_meta($post->ID, '_employee_license', true) != '')
+		$output .= sprintf('<p class="license">%s</p>', get_post_meta($post->ID, '_employee_license', true) );
 
-    if (get_post_meta($post->ID, '_employee_designations', true) != '')
-        $output .= sprintf('<p class="designations" itemprop="awards">%s</p>', get_post_meta($post->ID, '_employee_designations', true) );
+	if (get_post_meta($post->ID, '_employee_designations', true) != '')
+		$output .= sprintf('<p class="designations" itemprop="awards">%s</p>', get_post_meta($post->ID, '_employee_designations', true) );
 
-    if (get_post_meta($post->ID, '_employee_phone', true) != '')
-        $output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Office</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_phone', true) );
+	if (get_post_meta($post->ID, '_employee_phone', true) != '')
+		$output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Office</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_phone', true) );
 
-    if (get_post_meta($post->ID, '_employee_mobile', true) != '')
-        $output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Cell</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_mobile', true) );
+	if (get_post_meta($post->ID, '_employee_mobile', true) != '')
+		$output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Cell</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_mobile', true) );
 
-    if (get_post_meta($post->ID, '_employee_email', true) != '') {
-        $email = get_post_meta($post->ID, '_employee_email', true);
-        $output .= sprintf('<p><a class="email" itemprop="email" href="mailto:%s">%s</a></p>', antispambot($email), antispambot($email) );
-    }
+	if (get_post_meta($post->ID, '_employee_email', true) != '') {
+		$email = get_post_meta($post->ID, '_employee_email', true);
+		$output .= sprintf('<p><a class="email" itemprop="email" href="mailto:%s">%s</a></p>', antispambot($email), antispambot($email) );
+	}
 
-    if (get_post_meta($post->ID, '_employee_website', true) != '') {
-    	$website = get_post_meta($post->ID, '_employee_website', true);
-    	$website_no_http = preg_replace('#^https?://#', '', rtrim($website,'/'));
-        $output .= sprintf('<p><a class="website" itemprop="url" href="%s">%s</a></p>', $website, $website_no_http );
-    }
+	if (get_post_meta($post->ID, '_employee_website', true) != '') {
+		$website = get_post_meta($post->ID, '_employee_website', true);
+		$website_no_http = preg_replace('#^https?://#', '', rtrim($website,'/'));
+		$output .= sprintf('<p><a class="website" itemprop="url" href="%s">%s</a></p>', $website, $website_no_http );
+	}
 
-    if (get_post_meta($post->ID, '_employee_city', true) != '' || get_post_meta($post->ID, '_employee_address', true) != '' || get_post_meta($post->ID, '_employee_state', true) != '' || get_post_meta($post->ID, '_employee_zip', true) != '' ) {
+	if (get_post_meta($post->ID, '_employee_city', true) != '' || get_post_meta($post->ID, '_employee_address', true) != '' || get_post_meta($post->ID, '_employee_state', true) != '' || get_post_meta($post->ID, '_employee_zip', true) != '' ) {
 
-        $address = '<p class="adr" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">';
+		$address = '<p class="adr" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">';
 
-        if (get_post_meta($post->ID, '_employee_address', true) != '') {
-            $address .= '<span class="street-address" itemprop="streetAddress">' . get_post_meta($post->ID, '_employee_address', true) . '</span><br />';
-        }
+		if (get_post_meta($post->ID, '_employee_address', true) != '') {
+			$address .= '<span class="street-address" itemprop="streetAddress">' . get_post_meta($post->ID, '_employee_address', true) . '</span><br />';
+		}
 
-        if (get_post_meta($post->ID, '_employee_city', true) != '') {
-            $address .= '<span class="locality" itemprop="addressLocality">' . get_post_meta($post->ID, '_employee_city', true) . '</span>, ';
-        }
+		if (get_post_meta($post->ID, '_employee_city', true) != '') {
+			$address .= '<span class="locality" itemprop="addressLocality">' . get_post_meta($post->ID, '_employee_city', true) . '</span>, ';
+		}
 
-        if (get_post_meta($post->ID, '_employee_state', true) != '') {
-            $address .= '<abbr class="region" itemprop="addressRegion">' . get_post_meta($post->ID, '_employee_state', true) . '</abbr> ';
-        }
+		if (get_post_meta($post->ID, '_employee_state', true) != '') {
+			$address .= '<abbr class="region" itemprop="addressRegion">' . get_post_meta($post->ID, '_employee_state', true) . '</abbr> ';
+		}
 
-        if (get_post_meta($post->ID, '_employee_zip', true) != '') {
-            $address .= '<span class="postal-code" itemprop="postalCode">' . get_post_meta($post->ID, '_employee_zip', true) . '</span>';
-        }
+		if (get_post_meta($post->ID, '_employee_zip', true) != '') {
+			$address .= '<span class="postal-code" itemprop="postalCode">' . get_post_meta($post->ID, '_employee_zip', true) . '</span>';
+		}
 
-        $address .= '</p>';
+		$address .= '</p>';
 
-        if (get_post_meta($post->ID, '_employee_address', true) != '' || get_post_meta($post->ID, '_employee_city', true) != '' || get_post_meta($post->ID, '_employee_state', true) != '' || get_post_meta($post->ID, '_employee_zip', true) != '' ) {
-            $output .= $address;
-        }
-    }
+		if (get_post_meta($post->ID, '_employee_address', true) != '' || get_post_meta($post->ID, '_employee_city', true) != '' || get_post_meta($post->ID, '_employee_state', true) != '' || get_post_meta($post->ID, '_employee_zip', true) != '' ) {
+			$output .= $address;
+		}
+	}
 
-    return $output;
+	return $output;
 }
 
 function impa_employee_archive_details() {
 	global $post;
 
-    $output = '';
+	$output = '';
 
-    if (get_post_meta($post->ID, '_employee_title', true) != '')
-        $output .= sprintf('<p class="title" itemprop="jobTitle">%s</p>', get_post_meta($post->ID, '_employee_title', true) );
+	if (get_post_meta($post->ID, '_employee_title', true) != '')
+		$output .= sprintf('<p class="title" itemprop="jobTitle">%s</p>', get_post_meta($post->ID, '_employee_title', true) );
 
-    if (get_post_meta($post->ID, '_employee_phone', true) != '')
-        $output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Office</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_phone', true) );
+	if (get_post_meta($post->ID, '_employee_phone', true) != '')
+		$output .= sprintf('<p class="tel" itemprop="telephone"><span class="type">Office</span>: <span class="value">%s</span></p>', get_post_meta($post->ID, '_employee_phone', true) );
 
-    if (get_post_meta($post->ID, '_employee_email', true) != '') {
-        $email = get_post_meta($post->ID, '_employee_email', true);
-        $output .= sprintf('<p><a class="email" itemprop="email" href="mailto:%s">%s</a></p>', antispambot($email), antispambot($email) );
-    }
+	if (get_post_meta($post->ID, '_employee_email', true) != '') {
+		$email = get_post_meta($post->ID, '_employee_email', true);
+		$output .= sprintf('<p><a class="email" itemprop="email" href="mailto:%s">%s</a></p>', antispambot($email), antispambot($email) );
+	}
 
-    if (function_exists('_p2p_init') && function_exists('agentpress_listings_init') || function_exists('_p2p_init') && function_exists('wp_listings_init')) {
+	if (function_exists('_p2p_init') && function_exists('agentpress_listings_init') || function_exists('_p2p_init') && function_exists('wp_listings_init')) {
 		$listings = impa_get_connected_posts_of_type('agents_to_listings');
 		if ( !empty($listings) ) {
 			echo '<p><a class="agent-listings-link" href="' . get_permalink() . '#agent-listings">View My Listings</a></p>';
 		}
 	}
 
-    return $output;
+	return $output;
 }
 
 function impa_employee_social() {
 	global $post;
 
-    if (get_post_meta($post->ID, '_employee_facebook', true) != '' || get_post_meta($post->ID, '_employee_twitter', true) != '' || get_post_meta($post->ID, '_employee_linkedin', true) != '' || get_post_meta($post->ID, '_employee_googleplus', true) != '' || get_post_meta($post->ID, '_employee_pinterest', true) != '' || get_post_meta($post->ID, '_employee_youtube', true) != '' || get_post_meta($post->ID, '_employee_instagram', true) != '') {
+	if (get_post_meta($post->ID, '_employee_facebook', true) != '' || get_post_meta($post->ID, '_employee_twitter', true) != '' || get_post_meta($post->ID, '_employee_linkedin', true) != '' || get_post_meta($post->ID, '_employee_googleplus', true) != '' || get_post_meta($post->ID, '_employee_pinterest', true) != '' || get_post_meta($post->ID, '_employee_youtube', true) != '' || get_post_meta($post->ID, '_employee_instagram', true) != '') {
 
-        $output = '<div class="agent-social-profiles">';
+		$output = '<div class="agent-social-profiles">';
 
-        if (get_post_meta($post->ID, '_employee_facebook', true) != '') {
-            $output .= sprintf('<a class="fa fa-facebook" rel="me" itemprop="sameAs" href="%s" title="Facebook Profile"></a>', get_post_meta($post->ID, '_employee_facebook', true));
-        }
+		if (get_post_meta($post->ID, '_employee_facebook', true) != '') {
+			$output .= sprintf('<a class="fa fa-facebook" rel="me" itemprop="sameAs" href="%s" title="Facebook Profile"></a>', get_post_meta($post->ID, '_employee_facebook', true));
+		}
 
-        if (get_post_meta($post->ID, '_employee_twitter', true) != '') {
-            $output .= sprintf('<a class="fa fa-twitter" rel="me" itemprop="sameAs" href="%s" title="Twitter Profile"></a>', get_post_meta($post->ID, '_employee_twitter', true));
-        }
+		if (get_post_meta($post->ID, '_employee_twitter', true) != '') {
+			$output .= sprintf('<a class="fa fa-twitter" rel="me" itemprop="sameAs" href="%s" title="Twitter Profile"></a>', get_post_meta($post->ID, '_employee_twitter', true));
+		}
 
-        if (get_post_meta($post->ID, '_employee_linkedin', true) != '') {
-            $output .= sprintf('<a class="fa fa-linkedin" rel="me" itemprop="sameAs" href="%s" title="LinkedIn Profile"></a>', get_post_meta($post->ID, '_employee_linkedin', true));
-        }
+		if (get_post_meta($post->ID, '_employee_linkedin', true) != '') {
+			$output .= sprintf('<a class="fa fa-linkedin" rel="me" itemprop="sameAs" href="%s" title="LinkedIn Profile"></a>', get_post_meta($post->ID, '_employee_linkedin', true));
+		}
 
-        if (get_post_meta($post->ID, '_employee_googleplus', true) != '') {
-            $output .= sprintf('<a class="fa fa-google-plus" rel="me" itemprop="sameAs" href="%s" title="Google+ Profile"></a>', get_post_meta($post->ID, '_employee_googleplus', true));
-        }
+		if (get_post_meta($post->ID, '_employee_googleplus', true) != '') {
+			$output .= sprintf('<a class="fa fa-google-plus" rel="me" itemprop="sameAs" href="%s" title="Google+ Profile"></a>', get_post_meta($post->ID, '_employee_googleplus', true));
+		}
 
-        if (get_post_meta($post->ID, '_employee_pinterest', true) != '') {
-            $output .= sprintf('<a class="fa fa-pinterest" rel="me" itemprop="sameAs" href="%s" title="Pinterest Profile"></a>', get_post_meta($post->ID, '_employee_pinterest', true));
-        }
+		if (get_post_meta($post->ID, '_employee_pinterest', true) != '') {
+			$output .= sprintf('<a class="fa fa-pinterest" rel="me" itemprop="sameAs" href="%s" title="Pinterest Profile"></a>', get_post_meta($post->ID, '_employee_pinterest', true));
+		}
 
-        if (get_post_meta($post->ID, '_employee_youtube', true) != '') {
-            $output .= sprintf('<a class="fa fa-youtube" rel="me" itemprop="sameAs" href="%s" title="YouTube Profile"></a>', get_post_meta($post->ID, '_employee_youtube', true));
-        }
+		if (get_post_meta($post->ID, '_employee_youtube', true) != '') {
+			$output .= sprintf('<a class="fa fa-youtube" rel="me" itemprop="sameAs" href="%s" title="YouTube Profile"></a>', get_post_meta($post->ID, '_employee_youtube', true));
+		}
 
-        if (get_post_meta($post->ID, '_employee_instagram', true) != '') {
-            $output .= sprintf('<a class="fa fa-instagram" rel="me" itemprop="sameAs" href="%s" title="Instagram Profile"></a>', get_post_meta($post->ID, '_employee_instagram', true));
-        }
+		if (get_post_meta($post->ID, '_employee_instagram', true) != '') {
+			$output .= sprintf('<a class="fa fa-instagram" rel="me" itemprop="sameAs" href="%s" title="Instagram Profile"></a>', get_post_meta($post->ID, '_employee_instagram', true));
+		}
 
-        $output .= '</div><!-- .employee-social-profiles -->';
+		$output .= '</div><!-- .employee-social-profiles -->';
 
-        return $output;
-    }
+		return $output;
+	}
 }
 
 /**
@@ -279,31 +277,31 @@ add_action( 'pre_get_posts', 'impress_agents_post_number' );
 add_filter( 'dashboard_glance_items', 'impress_agents_glance_items', 10, 1 );
 function impress_agents_glance_items( $items = array() ) {
 
-    $post_types = array( 'employee' );
+	$post_types = array( 'employee' );
 
-    foreach( $post_types as $type ) {
+	foreach( $post_types as $type ) {
 
-        if( ! post_type_exists( $type ) ) continue;
+		if( ! post_type_exists( $type ) ) continue;
 
-        $num_posts = wp_count_posts( $type );
+		$num_posts = wp_count_posts( $type );
 
-        if( $num_posts ) {
+		if( $num_posts ) {
 
-            $published = intval( $num_posts->publish );
-            $post_type = get_post_type_object( $type );
+			$published = intval( $num_posts->publish );
+			$post_type = get_post_type_object( $type );
 
-            $text = _n( '%s ' . $post_type->labels->singular_name, '%s ' . $post_type->labels->name, $published, 'impress_agents' );
-            $text = sprintf( $text, number_format_i18n( $published ) );
+			$text = _n( '%s ' . $post_type->labels->singular_name, '%s ' . $post_type->labels->name, $published, 'impress_agents' );
+			$text = sprintf( $text, number_format_i18n( $published ) );
 
-            if ( current_user_can( $post_type->cap->edit_posts ) ) {
-                $items[] = sprintf( '<a class="%1$s-count" href="edit.php?post_type=%1$s">%2$s</a>', $type, $text ) . "\n";
-            } else {
-                $items[] = sprintf( '<span class="%1$s-count">%2$s</span>', $type, $text ) . "\n";
-            }
-        }
-    }
+			if ( current_user_can( $post_type->cap->edit_posts ) ) {
+				$items[] = sprintf( '<a class="%1$s-count" href="edit.php?post_type=%1$s">%2$s</a>', $type, $text ) . "\n";
+			} else {
+				$items[] = sprintf( '<span class="%1$s-count">%2$s</span>', $type, $text ) . "\n";
+			}
+		}
+	}
 
-    return $items;
+	return $items;
 }
 
 /**
