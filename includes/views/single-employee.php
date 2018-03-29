@@ -8,7 +8,7 @@
 
 add_action('wp_enqueue_scripts', 'enqueue_single_employee_scripts');
 function enqueue_single_employee_scripts() {
-	wp_enqueue_style( 'font-awesome' );
+	wp_enqueue_style( 'font-awesome-4.7.0' );
 }
 
 function single_employee_post_content() {

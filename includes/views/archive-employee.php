@@ -10,9 +10,8 @@
 
 add_action('wp_enqueue_scripts', 'enqueue_single_employee_scripts');
 function enqueue_single_employee_scripts() {
-	wp_enqueue_style( 'font-awesome' );
+	wp_enqueue_style( 'font-awesome-4.7.0' );
 }
-
 add_filter('body_class', 'add_body_class');
 
 function add_body_class($classes) {
