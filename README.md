@@ -7,6 +7,8 @@ Author URL: http://www.agentevolution.com/
 
 **Requires at least:** 4.3.0
 
+**Requires PHP:** 5.4
+
 **Tested up to:** 4.9.4
 
 **Stable tag:** 1.1.4

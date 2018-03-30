@@ -4,6 +4,7 @@ Author URL: http://www.agentevolution.com/
 Contributors: agentevolution, davebonds, chadajohnson, idxco
 Tags: agents, employees, employee directory, agent directory, agents, idx broker, idx, impress
 Requires at least: 4.3.0
+Requires PHP: 5.4
 Tested up to: 4.9.4
 Stable tag: 1.1.4
 License: GPLv2 or later
