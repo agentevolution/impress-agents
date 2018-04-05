@@ -10,10 +10,12 @@ add_action( 'pre_get_posts', 'impa_change_sort_order' );
  */
 function impa_change_sort_order( $query ) {
 
-	if( $query->is_main_query() && !is_admin() && is_post_type_archive( 'employee' ) || is_tax() ) {
-		$query->set( 'meta_key', '_employee_last_name' );
-		$query->set( 'orderby', 'meta_value' );
-		$query->set( 'order', 'ASC' );
+	if ( $query->is_main_query() && ! is_admin() ) {
+		if ( is_post_type_archive( 'employee' ) || is_tax( array( 'offices', 'job-types' ) ) ) {
+			$query->set( 'meta_key', '_employee_last_name' );
+			$query->set( 'orderby', 'meta_value' );
+			$query->set( 'order', 'ASC' );
+		}
 	}
 }
 
