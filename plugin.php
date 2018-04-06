@@ -6,7 +6,7 @@
 	Author: Agent Evolution
 	Author URI: http://agentevolution.com
 
-	Version: 1.1.3
+	Version: 1.1.4
 
 	License: GNU General Public License v2.0 (or later)
 	License URI: http://www.opensource.org/licenses/gpl-license.php
@@ -57,7 +57,7 @@ function impress_agents_init() {
 	global $_impress_agents, $_impress_agents_taxonomies;
 
 	define( 'IMPRESS_AGENTS_URL', plugin_dir_url( __FILE__ ) );
-	define( 'IMPRESS_AGENTS_VERSION', '1.1.3' );
+	define( 'IMPRESS_AGENTS_VERSION', '1.1.4' );
 
 	/** Load textdomain for translation */
 	load_plugin_textdomain( 'impress_agents', false, basename( dirname( __FILE__ ) ) . '/languages/' );
@@ -84,8 +84,7 @@ function impress_agents_init() {
 		$options = get_option('plugin_impress_agents_settings');
 
 		/** Register Font Awesome icons but don't enqueue them */
-		wp_register_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', '', null, 'all');
-		wp_enqueue_style('font-awesome');
+		wp_register_style( 'font-awesome-4.7.0', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(), '4.7.0' );
 
 		if ( !isset($options['impress_agents_stylesheet_load']) ) {
 			$options['impress_agents_stylesheet_load'] = 0;

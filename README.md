@@ -7,9 +7,11 @@ Author URL: http://www.agentevolution.com/
 
 **Requires at least:** 4.3.0
 
-**Tested up to:** 4.6.1
+**Requires PHP:** 5.4
 
-**Stable tag:** 1.1.3
+**Tested up to:** 4.9.4
+
+**Stable tag:** 1.1.4
 
 **License:** GPLv2 or later
 
@@ -92,22 +94,28 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 
 ## Changelog ##
 
-= 1.1.3 =
-* Released 12.22.2016
+### 1.1.4 ###
+*Released 04.03.2018*
+* Fix: Pagination issue
+* Fix: Default sort order is now by last name meta field
+* Fix: Changed Font Awesome handle to prevent conflicts
+
+### 1.1.3 ###
+*Released 12.22.2016*
 * Added: Support for selective refresh of widgets
 * Fix: Added sortable parameter when registering post type connections
 
 ### 1.1.2 ###
-* Released 09.26.2016
+*Released 09.26.2016*
 * Fix: Update npmcdn link with unpkg link for external scripts
 
 ### 1.1.1 ###
-Released 08.18.2016
+*Released 08.18.2016*
 * Fix: Update for PHP7 compatibility
 * Fix: Issue with imported agents changing to draft
 
 ### 1.1.0 ###
-Released 05.26.2016
+*Released 05.26.2016*
 * Added: Posts 2 Posts functionality to connect to IMPress Listings
 * Added: Order and Orderby parameters to Featured Agent widget and shortcode
 * Added: Ability to show random agent in Featured Agent widget
