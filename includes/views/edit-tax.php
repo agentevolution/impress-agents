@@ -2,7 +2,7 @@
 $options = get_option( $this->settings_field );
 
 if ( array_key_exists( $_REQUEST['id'], (array) $options ) ) {
-	$taxonomy = stripslashes_deep( $options[$_REQUEST['id']] );
+	$taxonomy = stripslashes_deep( $options[ $_REQUEST['id'] ] );
 } else {
 	wp_die( __( "Nice try, partner. But that taxonomy doesn't exist or can't be edited. Click back and try again.", 'impress_agents' ) );
 }
