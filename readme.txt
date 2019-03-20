@@ -47,7 +47,6 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 5. Front End > Single Employee
 6. Front End > Employee Archive
 7. Front End > Employee Widget
-8. Front End > Connected Listings
 
 == Changelog ==
 
