@@ -52,38 +52,31 @@ Just post to the support forum here on [wordpress.org](https://wordpress.org/sup
 
 ## Screenshots ##
 
-###1. WP Admin > Add New
-###
+#### 1. WP Admin > Add New ####
 ![WPAdmin Add New Employee](images/screenshots/1-WPAdmin-AddNew.png)
 
 
-###2. WP Admin > Employees
-###
+#### 2. WP Admin > Employees ####
 ![WPAdmin Employees](images/screenshots/2-WPAdmin-Employees.png)
 
 
-###3. WP Admin > Employee Taxonomies
-###
+#### 3. WP Admin > Employee Taxonomies ####
 ![WPAdmin Employee Taxonomies](images/screenshots/3-WPAdmin-EmployeeTaxonomies.png)
 
 
-###4. WP Admin > Settings
-###
+#### 4. WP Admin > Settings ####
 ![WPAdmin Settings](images/screenshots/4-WPAdmin-Settings.png)
 
 
-###5. Front End > Single Employee
-###
+#### 5. Front End > Single Employee ####
 ![Front End Single Employee](images/screenshots/5-FrontEnd-SingleEmployee.png)
 
 
-###6. Front End > Employee Archive
-###
+#### 6. Front End > Employee Archive ####
 ![Front End Employee Archive](images/screenshots/6-FrontEnd-EmployeeArchive.png)
 
 
-###7. Front End > Employee Widget
-###
+#### 7. Front End > Employee Widget ####
 ![Front End Employee Widget](images/screenshots/7-FrontEnd-EmployeeWidget.png)
 
 
