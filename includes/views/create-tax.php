@@ -1,5 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 screen_icon( 'themes' ); ?>
 <h2><?php _e( 'Employee Taxonomies', 'impress_agents' ); ?></h2>
 
@@ -21,8 +23,8 @@ screen_icon( 'themes' ); ?>
 			<tfoot>
 			<tr>
 			<th scope="col" class="manage-column column-slug"><?php _e( 'ID', 'impress_agents' ); ?></th>
-			<th scope="col" class="manage-column column-singular-name"><?php _e( 'Singular Name', 'impress_agents'); ?></th>
-			<th scope="col" class="manage-column column-plural-name"><?php _e( 'Plural Name', 'impress_agents'); ?></th>
+			<th scope="col" class="manage-column column-singular-name"><?php _e( 'Singular Name', 'impress_agents' ); ?></th>
+			<th scope="col" class="manage-column column-plural-name"><?php _e( 'Plural Name', 'impress_agents' ); ?></th>
 			</tr>
 			</tfoot>
 
@@ -34,9 +36,17 @@ screen_icon( 'themes' ); ?>
 				$employee_taxonomies = array_merge( $this->employee_job_type_taxonomy(), $this->employee_offices_taxonomy(), get_option( $this->settings_field ) );
 
 				foreach ( (array) $employee_taxonomies as $id => $data ) :
-				?>
+					?>
 
-				<tr <?php if ( $alt ) { echo 'class="alternate"'; $alt = false; } else { $alt = true; } ?>>
+				<tr 
+					<?php
+					if ( $alt ) {
+						echo 'class="alternate"';
+						$alt = false;
+					} else {
+						$alt = true; }
+					?>
+				>
 					<td class="slug column-slug">
 
 					<?php if ( isset( $data['editable'] ) && 0 === $data['editable'] ) : ?>
@@ -53,8 +63,8 @@ screen_icon( 'themes' ); ?>
 					<?php endif; ?>
 
 					</td>
-					<td class="singular-name column-singular-name"><?php echo esc_html( $data['labels']['singular_name'] )?></td>
-					<td class="plural-name column-plural-name"><?php echo esc_html( $data['labels']['name'] )?></td>
+					<td class="singular-name column-singular-name"><?php echo esc_html( $data['labels']['singular_name'] ); ?></td>
+					<td class="plural-name column-plural-name"><?php echo esc_html( $data['labels']['name'] ); ?></td>
 				</tr>
 
 				<?php endforeach; ?>
